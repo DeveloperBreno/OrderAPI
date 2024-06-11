@@ -1,0 +1,16 @@
+C:\DEV\ddd\CursoSobreDDDnoYouTube\API_DDD\Dominio\bin\Debug\net8.0\Dominio.deps.json
+C:\DEV\ddd\CursoSobreDDDnoYouTube\API_DDD\Dominio\bin\Debug\net8.0\Dominio.dll
+C:\DEV\ddd\CursoSobreDDDnoYouTube\API_DDD\Dominio\bin\Debug\net8.0\Dominio.pdb
+C:\DEV\ddd\CursoSobreDDDnoYouTube\API_DDD\Dominio\bin\Debug\net8.0\Entidades.dll
+C:\DEV\ddd\CursoSobreDDDnoYouTube\API_DDD\Dominio\bin\Debug\net8.0\Entidades.pdb
+C:\DEV\ddd\CursoSobreDDDnoYouTube\API_DDD\Dominio\obj\Debug\net8.0\Dominio.csproj.AssemblyReference.cache
+C:\DEV\ddd\CursoSobreDDDnoYouTube\API_DDD\Dominio\obj\Debug\net8.0\Dominio.GeneratedMSBuildEditorConfig.editorconfig
+C:\DEV\ddd\CursoSobreDDDnoYouTube\API_DDD\Dominio\obj\Debug\net8.0\Dominio.AssemblyInfoInputs.cache
+C:\DEV\ddd\CursoSobreDDDnoYouTube\API_DDD\Dominio\obj\Debug\net8.0\Dominio.AssemblyInfo.cs
+C:\DEV\ddd\CursoSobreDDDnoYouTube\API_DDD\Dominio\obj\Debug\net8.0\Dominio.csproj.CoreCompileInputs.cache
+C:\DEV\ddd\CursoSobreDDDnoYouTube\API_DDD\Dominio\obj\Debug\net8.0\Dominio.sourcelink.json
+C:\DEV\ddd\CursoSobreDDDnoYouTube\API_DDD\Dominio\obj\Debug\net8.0\Dominio.csproj.Up2Date
+C:\DEV\ddd\CursoSobreDDDnoYouTube\API_DDD\Dominio\obj\Debug\net8.0\Dominio.dll
+C:\DEV\ddd\CursoSobreDDDnoYouTube\API_DDD\Dominio\obj\Debug\net8.0\refint\Dominio.dll
+C:\DEV\ddd\CursoSobreDDDnoYouTube\API_DDD\Dominio\obj\Debug\net8.0\Dominio.pdb
+C:\DEV\ddd\CursoSobreDDDnoYouTube\API_DDD\Dominio\obj\Debug\net8.0\ref\Dominio.dll

@@ -1,0 +1,15 @@
+C:\DEV\ddd\CursoSobreDDDnoYouTube\API_DDD\Enditades\bin\Debug\net8.0\Endidades.deps.json
+C:\DEV\ddd\CursoSobreDDDnoYouTube\API_DDD\Enditades\bin\Debug\net8.0\Endidades.runtimeconfig.json
+C:\DEV\ddd\CursoSobreDDDnoYouTube\API_DDD\Enditades\bin\Debug\net8.0\Endidades.dll
+C:\DEV\ddd\CursoSobreDDDnoYouTube\API_DDD\Enditades\bin\Debug\net8.0\Endidades.pdb
+C:\DEV\ddd\CursoSobreDDDnoYouTube\API_DDD\Enditades\obj\Debug\net8.0\Endidades.csproj.AssemblyReference.cache
+C:\DEV\ddd\CursoSobreDDDnoYouTube\API_DDD\Enditades\obj\Debug\net8.0\Endidades.GeneratedMSBuildEditorConfig.editorconfig
+C:\DEV\ddd\CursoSobreDDDnoYouTube\API_DDD\Enditades\obj\Debug\net8.0\Endidades.AssemblyInfoInputs.cache
+C:\DEV\ddd\CursoSobreDDDnoYouTube\API_DDD\Enditades\obj\Debug\net8.0\Endidades.AssemblyInfo.cs
+C:\DEV\ddd\CursoSobreDDDnoYouTube\API_DDD\Enditades\obj\Debug\net8.0\Endidades.csproj.CoreCompileInputs.cache
+C:\DEV\ddd\CursoSobreDDDnoYouTube\API_DDD\Enditades\obj\Debug\net8.0\Endidades.sourcelink.json
+C:\DEV\ddd\CursoSobreDDDnoYouTube\API_DDD\Enditades\obj\Debug\net8.0\Endidades.dll
+C:\DEV\ddd\CursoSobreDDDnoYouTube\API_DDD\Enditades\obj\Debug\net8.0\refint\Endidades.dll
+C:\DEV\ddd\CursoSobreDDDnoYouTube\API_DDD\Enditades\obj\Debug\net8.0\Endidades.pdb
+C:\DEV\ddd\CursoSobreDDDnoYouTube\API_DDD\Enditades\obj\Debug\net8.0\Endidades.genruntimeconfig.cache
+C:\DEV\ddd\CursoSobreDDDnoYouTube\API_DDD\Enditades\obj\Debug\net8.0\ref\Endidades.dll
