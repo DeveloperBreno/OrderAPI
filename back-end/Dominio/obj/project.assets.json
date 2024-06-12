@@ -2948,11 +2948,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\DEV\\ddd\\CursoSobreDDDnoYouTube\\API_DDD\\Dominio\\Dominio.csproj",
+      "projectUniqueName": "C:\\DEV\\cursoReact\\OrderAPI\\back-end\\Dominio\\Dominio.csproj",
       "projectName": "Dominio",
-      "projectPath": "C:\\DEV\\ddd\\CursoSobreDDDnoYouTube\\API_DDD\\Dominio\\Dominio.csproj",
+      "projectPath": "C:\\DEV\\cursoReact\\OrderAPI\\back-end\\Dominio\\Dominio.csproj",
       "packagesPath": "C:\\Users\\45781005889\\.nuget\\packages\\",
-      "outputPath": "C:\\DEV\\ddd\\CursoSobreDDDnoYouTube\\API_DDD\\Dominio\\obj\\",
+      "outputPath": "C:\\DEV\\cursoReact\\OrderAPI\\back-end\\Dominio\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -2974,8 +2974,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\DEV\\ddd\\CursoSobreDDDnoYouTube\\API_DDD\\Enditades\\Entidades.csproj": {
-              "projectPath": "C:\\DEV\\ddd\\CursoSobreDDDnoYouTube\\API_DDD\\Enditades\\Entidades.csproj"
+            "C:\\DEV\\cursoReact\\OrderAPI\\back-end\\Enditades\\Entidades.csproj": {
+              "projectPath": "C:\\DEV\\cursoReact\\OrderAPI\\back-end\\Enditades\\Entidades.csproj"
             }
           }
         }

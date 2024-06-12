@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "kgfSucwIJ+v21C2+6MVTgdFazgT5QxENs8JyicV8EYhjJ2mpCA+jAEZL50IHGVPZciDN59ZRS+M00BMst/9l3w==",
+  "dgSpecHash": "XcvT1c9FzmtaaUlrRPLZk/9VyiBZb2fD/IWi0SuNVDDgjY8KgACaqhdJFTrPgpQp27f3nyv28hPc4Ld13ezDsw==",
   "success": true,
-  "projectFilePath": "C:\\DEV\\ddd\\CursoSobreDDDnoYouTube\\API_DDD\\Aplicacao\\Aplicacao.csproj",
+  "projectFilePath": "C:\\DEV\\cursoReact\\OrderAPI\\back-end\\Aplicacao\\Aplicacao.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\45781005889\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\45781005889\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

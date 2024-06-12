@@ -5372,11 +5372,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\DEV\\ddd\\CursoSobreDDDnoYouTube\\API_DDD\\WebAPI\\WebAPI.csproj",
+      "projectUniqueName": "C:\\DEV\\cursoReact\\OrderAPI\\back-end\\WebAPI\\WebAPI.csproj",
       "projectName": "WebAPI",
-      "projectPath": "C:\\DEV\\ddd\\CursoSobreDDDnoYouTube\\API_DDD\\WebAPI\\WebAPI.csproj",
+      "projectPath": "C:\\DEV\\cursoReact\\OrderAPI\\back-end\\WebAPI\\WebAPI.csproj",
       "packagesPath": "C:\\Users\\45781005889\\.nuget\\packages\\",
-      "outputPath": "C:\\DEV\\ddd\\CursoSobreDDDnoYouTube\\API_DDD\\WebAPI\\obj\\",
+      "outputPath": "C:\\DEV\\cursoReact\\OrderAPI\\back-end\\WebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -5398,11 +5398,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\DEV\\ddd\\CursoSobreDDDnoYouTube\\API_DDD\\Aplicacao\\Aplicacao.csproj": {
-              "projectPath": "C:\\DEV\\ddd\\CursoSobreDDDnoYouTube\\API_DDD\\Aplicacao\\Aplicacao.csproj"
+            "C:\\DEV\\cursoReact\\OrderAPI\\back-end\\Aplicacao\\Aplicacao.csproj": {
+              "projectPath": "C:\\DEV\\cursoReact\\OrderAPI\\back-end\\Aplicacao\\Aplicacao.csproj"
             },
-            "C:\\DEV\\ddd\\CursoSobreDDDnoYouTube\\API_DDD\\Insfraestrutura\\Insfraestrutura.csproj": {
-              "projectPath": "C:\\DEV\\ddd\\CursoSobreDDDnoYouTube\\API_DDD\\Insfraestrutura\\Insfraestrutura.csproj"
+            "C:\\DEV\\cursoReact\\OrderAPI\\back-end\\Insfraestrutura\\Insfraestrutura.csproj": {
+              "projectPath": "C:\\DEV\\cursoReact\\OrderAPI\\back-end\\Insfraestrutura\\Insfraestrutura.csproj"
             }
           }
         }
