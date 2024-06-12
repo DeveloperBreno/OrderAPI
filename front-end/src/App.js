@@ -4,8 +4,12 @@ import Cart from './components/partials/Cart';
 import Login from './components/partials/Login';
 import Register from './components/partials/Register';
 import Lojas from './components/partials/Lojas';
+import TemporaryMessage from './components/alerts/TemporaryMessage';
 
 function App() {
+
+  const [showMessage, setShowMessage] = useState(false);
+  const [messageText, setMessageText] = useState('');
 
   const [pathParam, setPathParam] = useState('');
 
@@ -22,7 +26,7 @@ function App() {
       url: 'eli-docinhos',
       endereco: 'Rua 1, 234',
       disponivelAgora: true,
-      image: 'https://images-na.ssl-images-amazon.com/images/I/61187631-L._SL1500_.jpg',
+      image: 'https://via.placeholder.com/300x300',
     },
     {
       id: 2,
@@ -30,7 +34,7 @@ function App() {
       url: 'adega-x',
       endereco: 'Rua x, 14',
       disponivelAgora: true,
-      image: 'https://images-na.ssl-images-amazon.com/images/I/61187631-L._SL1500_.jpg',
+      image: 'https://via.placeholder.com/300x300',
     },
     {
       id: 3,
@@ -38,7 +42,7 @@ function App() {
       url: 'restaurante-bad',
       endereco: 'Av. xyz, 501',
       disponivelAgora: false,
-      image: 'https://images-na.ssl-images-amazon.com/images/I/61187631-L._SL1500_.jpg',
+      image: 'https://via.placeholder.com/300x300',
     },
   ]);
 
@@ -49,7 +53,7 @@ function App() {
       price: 18.99,
       currentPrice: 9.99,
       quantity: 0,
-      image: 'https://images-na.ssl-images-amazon.com/images/I/61187631-L._SL1500_.jpg',
+      image: 'https://via.placeholder.com/300x300',
       stock: 6
     },
     {
@@ -58,7 +62,7 @@ function App() {
       price: 18.99,
       currentPrice: 12.99,
       quantity: 0,
-      image: 'https://images-na.ssl-images-amazon.com/images/I/61187631-L._SL1500_.jpg',
+      image: 'https://via.placeholder.com/300x300',
       stock: 6
 
     },
@@ -68,14 +72,26 @@ function App() {
       price: 6.99,
       currentPrice: 12.99,
       quantity: 0,
-      image: 'https://images-na.ssl-images-amazon.com/images/I/61187631-L._SL1500_.jpg',
+      image: 'https://via.placeholder.com/300x300',
       stock: 6
     },
   ]);
 
-const setLoja = (urlLoja) => {
+  const notificar = (message) => {
+    setMessageText(message);
+    setShowMessage(true);
+    setTimeout(() => {
+      setShowMessage(false);
+    }, 5000);
+  };
 
-}
+  const onSelectLoja = (loja) => {
+    if (loja.disponivelAgora) {
+      setPathParam(loja.url);
+    } else {
+      notificar(`A loja ${loja.name} está indisponível no momento.`);
+    }
+  };
 
   const [cartItems, setCartItems] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -117,11 +133,35 @@ const setLoja = (urlLoja) => {
 
   return (
     <div>
+      {showMessage && <TemporaryMessage message={messageText} />}
 
       <>
         <div className='container'>
           <div className='row'>
-            <div className='col-md-10'>
+
+
+
+            <div className='col-md-2'>
+
+              {pathParam === '' ? (
+                <div className='col-md-1'>
+
+                </div>
+              ) : (
+                <a
+                  href="#"
+                  onClick={() => setPathParam('')}
+                  className="mt-5 text-primary"
+                  style={{ textDecoration: 'underline', cursor: 'pointer' }}
+                >
+                  Lojas
+                </a>
+              )}
+
+
+            </div>
+
+            <div className='col-md-8'>
 
             </div>
             {isLoggedIn ? (
@@ -151,7 +191,7 @@ const setLoja = (urlLoja) => {
         </>
       ) : (
         <>
-         <Lojas lojas={lojas} setLoja={setLoja} />
+          <Lojas lojas={lojas} onSelectLoja={onSelectLoja} />
         </>
       )}
 

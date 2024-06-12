@@ -1,0 +1,18 @@
+/* TemporaryMessage.css */
+.temporary-message {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    z-index: 9999; /* Valor alto para ficar na frente de outros elementos */
+  }
+  
+  .temporary-message.show {
+    opacity: 1;
+  }
