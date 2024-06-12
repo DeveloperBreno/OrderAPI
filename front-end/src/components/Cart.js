@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
 
 const Cart = ({ cartItems, onRemoveFromCart }) => {
   return (
@@ -7,17 +8,32 @@ const Cart = ({ cartItems, onRemoveFromCart }) => {
       {cartItems.length === 0 ? (
         <p>Seu carrinho está vazio.</p>
       ) : (
-        <ul>
-          {cartItems.map((item) => (
-            <li key={item.id}>
-              <h3>{item.name}</h3>
-              <p>Preço: {item.price.toFixed(2)}</p>
-              <p>Preço Atual: {item.currentPrice.toFixed(2)}</p>
-              <p>Quantidade: {item.quantity}</p>
-              <button onClick={() => onRemoveFromCart(item.id)}>Remover</button>
-            </li>
-          ))}
-        </ul>
+        <table className="table table-striped table-bordered table-hover">
+          <thead className="thead-dark">
+            <tr>
+              <th>Produto</th>
+              <th>Preço</th>
+              <th>Preço Atual</th>
+              <th>Quantidade</th>
+              <th>Ação</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cartItems.map((item) => (
+              <tr key={item.id}>
+                <td>{item.name}</td>
+                <td>{item.price.toFixed(2)}</td>
+                <td>{item.currentPrice.toFixed(2)}</td>
+                <td>{item.quantity}</td>
+                <td>
+                  <Button className='btn' variant="danger" onClick={() => onRemoveFromCart(item.id)}>
+                    Remover
+                  </Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       )}
     </div>
   );

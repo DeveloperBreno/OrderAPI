@@ -33,10 +33,12 @@ function App() {
 
   return (
     <div>
-      <ProductList products={products} onAddToCart={handleAddToCart} />
       <Cart cartItems={cartItems} onRemoveFromCart={handleRemoveFromCart} />
-      <Login onLogin={handleLogin} />
-      <Register onRegister={handleRegister} />
+      
+      (isLoggedIn == true &&  <Login onLogin={handleLogin} /> )  
+      (isLoggedIn == false && <Register onRegister={handleRegister} /> />)  
+
+      <ProductList products={products} onAddToCart={handleAddToCart} />
     </div>
   );
 }

@@ -85,11 +85,11 @@ var app = builder.Build();
 app.UseCors(b => b.WithOrigins("https://google.com", "https://microsoft.com"));
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
+//if (app.Environment.IsDevelopment())
+//{
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+//}
 
 app.UseHttpsRedirection();
 
