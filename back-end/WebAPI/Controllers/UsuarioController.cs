@@ -2,6 +2,7 @@ using Aplicacao.Interfaces;
 using Entidades.Entidades;
 using Entidades.Enums;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
@@ -31,6 +32,7 @@ public class UsuarioController : ControllerBase
         _signInManager = signInManager;
         _logger = logger;
     }
+
     
     [AllowAnonymous]
     [Produces("application/json")]
@@ -69,6 +71,7 @@ public class UsuarioController : ControllerBase
             return Ok("Erro ao confirmar usuários");
     }
 
+    
     [AllowAnonymous]
     [Produces("application/json")]
     [HttpPost("/User/Token")]

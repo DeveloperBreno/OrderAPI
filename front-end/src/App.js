@@ -127,8 +127,11 @@ function App() {
     // Implemente a lógica de autenticação aqui
 
     try {
+
+
+
       let headersList = {
-        "User-Agent": "Thunder Client (https://www.thunderclient.com)",
+        "User-Agent": "Thunder Client (http://localhost:3000)",
         "accept": "*/*",
         "Content-Type": "application/json"
       }
@@ -144,12 +147,11 @@ function App() {
         method: "POST",
         body: bodyContent,
         headers: headersList,
-        mode: 'cors', // Adicione esta linha
-        credentials: 'include' // Adicione esta linha
       });
 
       let data = await response.text();
       console.log(data);
+
 
       setIsLoggedIn(true);
 

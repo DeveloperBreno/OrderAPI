@@ -2,6 +2,7 @@
 using Entidades.Entidades;
 using Entidades.Notificacoes;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Models;
 
@@ -20,6 +21,7 @@ public class NoticiaController : ControllerBase
         _IAplicacaoUsuario = iAplicacaoUsuario;
     }
 
+    
     [Authorize]
     [Produces("application/json")]
     [HttpPost("/Noticia/List")]
@@ -28,6 +30,7 @@ public class NoticiaController : ControllerBase
         return await _aplicacaoNoticia.ListarNoticiasAtivas();
     }
 
+    
     [Authorize]
     [Produces("application/json")]
     [HttpPost("/Noticia/Create")]
@@ -48,6 +51,7 @@ public class NoticiaController : ControllerBase
         return novaNoticia.Notificacoes;
     }
 
+    
     [Authorize]
     [Produces("application/json")]
     [HttpPost("/Update")]
@@ -63,6 +67,7 @@ public class NoticiaController : ControllerBase
         return novaNoticia.Notificacoes;
     }
 
+    
     [Authorize]
     [Produces("application/json")]
     [HttpPost("/Delete")]

@@ -23,7 +23,7 @@ http://localhost:15672
 via terminal vá até a pasta: WebAPI
 
 faz build:
-dotnet publish -c Release -o /out --runtime linux-x64
+dotnet publish -c Release -o ./out --runtime linux-x64
 
 construir imagem: 
 docker build -t api .
