@@ -19,7 +19,7 @@ function App() {
     setPathParam(param);
   }, []);
 
-  const [lojas, setLojas] = useState([
+  const [lojas] = useState([
     {
       id: 1,
       name: 'Eli docinhos',
@@ -88,6 +88,7 @@ function App() {
   const onSelectLoja = (loja) => {
     if (loja.disponivelAgora) {
       setPathParam(loja.url);
+      window.location.href = `/${loja.url}`;
     } else {
       notificar(`A loja ${loja.name} está indisponível no momento.`);
     }
@@ -101,7 +102,7 @@ function App() {
     if (existe.length > 0) {
       product.quantity = existe[0].quantity + 1;
 
-      const newItems = cartItems.filter(o => o.id != product.id);
+      const newItems = cartItems.filter(o => o.id !== product.id);
       setCartItems([...newItems, product]);
 
     } else {
@@ -122,9 +123,41 @@ function App() {
     setProducts([...novaListaDeProduto, produto]);
   };
 
-  const handleLogin = (cpf, password) => {
+  const handleLogin = async (cpf, password) => {
     // Implemente a lógica de autenticação aqui
-    setIsLoggedIn(true);
+
+    try {
+      let headersList = {
+        "User-Agent": "Thunder Client (https://www.thunderclient.com)",
+        "accept": "*/*",
+        "Content-Type": "application/json"
+      }
+
+      let bodyContent = JSON.stringify({
+        "email": "developerbreno@gmail.com",
+        "senha": "DEVBRE>no.257.DEVBRE",
+        "celular": "string",
+        "nascimento": "2024-06-13T00:33:09.644Z"
+      });
+
+      let response = await fetch("http://localhost:5000/User/Token", {
+        method: "POST",
+        body: bodyContent,
+        headers: headersList,
+        mode: 'cors', // Adicione esta linha
+        credentials: 'include' // Adicione esta linha
+      });
+
+      let data = await response.text();
+      console.log(data);
+
+      setIsLoggedIn(true);
+
+    } catch (error) {
+      console.error('Erro:', error);
+    }
+
+
   };
 
   const handleRegister = (address, number, cep, complement) => {
@@ -148,14 +181,16 @@ function App() {
 
                 </div>
               ) : (
-                <a
-                  href="#"
-                  onClick={() => setPathParam('')}
-                  className="mt-5 text-primary"
-                  style={{ textDecoration: 'underline', cursor: 'pointer' }}
-                >
-                  Lojas
-                </a>
+                <div>
+                  <p
+                    href="#"
+                    onClick={() => setPathParam('')}
+                    className="mt-5 text-primary"
+                    style={{ textDecoration: 'underline', cursor: 'pointer' }}
+                  >
+                    Lojas
+                  </p>
+                </div>
               )}
 
 

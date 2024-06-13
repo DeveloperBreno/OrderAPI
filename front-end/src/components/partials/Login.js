@@ -21,15 +21,15 @@ const Login = ({ onLogin }) => {
       <div className="row">
         <div className="col-md-6">
 
-          <a
-            href="#"
-            onClick={toggleLoginModal}
-            className="mt-5 text-primary"
-            style={{ textDecoration: 'underline', cursor: 'pointer' }}
-          >
-            Entrar
-          </a>
-
+          <div>
+            <p
+              onClick={toggleLoginModal}
+              className="mt-5 text-primary"
+              style={{ textDecoration: 'underline', cursor: 'pointer' }}
+            >
+              Entrar
+            </p>
+          </div>
           <Modal show={showLoginModal} onHide={toggleLoginModal}>
             <Modal.Header closeButton>
               <Modal.Title>Login</Modal.Title>

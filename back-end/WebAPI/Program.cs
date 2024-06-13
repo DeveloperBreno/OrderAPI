@@ -16,8 +16,16 @@ using WebAPI.Token;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddCors();
-
+//builder.Services.AddCors();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyHeader()
+               .AllowAnyMethod();
+    });
+});
 // Recupera a string de conexão do appsettings.json
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
@@ -82,12 +90,14 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-app.UseCors(b => b.WithOrigins("https://google.com", "https://microsoft.com"));
+//app.UseCors(b => b.WithOrigins("https://google.com", "https://microsoft.com", "http://localhost:3000"));
+
+app.UseCors("AllowAll");
 
 // Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
 //{
-    app.UseSwagger();
+app.UseSwagger();
     app.UseSwaggerUI();
 //}
 

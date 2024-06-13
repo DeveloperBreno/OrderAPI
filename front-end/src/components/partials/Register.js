@@ -19,14 +19,16 @@ const Register = ({ onRegister }) => {
 
   return (
     <>
-      <a
-        href="#"
-        onClick={handleShowModal}
-        className="mt-5 text-primary"
-        style={{ textDecoration: 'underline', cursor: 'pointer' }}
-      >
-        Cadastrar
-      </a>
+      <div>
+        <p
+          href="#"
+          onClick={handleShowModal}
+          className="mt-5 text-primary"
+          style={{ textDecoration: 'underline', cursor: 'pointer' }}
+        >
+          Cadastrar
+        </p>
+      </div>
 
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
