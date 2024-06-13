@@ -1,21 +1,13 @@
-# Usar a imagem base do Node.js
-FROM node:14-alpine
-
-# Definir o diretório de trabalho
+# Etapa de Build
+FROM node:14-alpine AS build
 WORKDIR /app
-
-# Copiar os arquivos do projeto
 COPY package*.json ./
-COPY . .
-
-# Instalar as dependências
 RUN npm install
-
-# Construir o aplicativo React para produção
+COPY . .
 RUN npm run build
 
-# Expor a porta 3000
+# Etapa de Produção
+FROM nginx:stable-alpine
+COPY --from=build /app/build /usr/share/nginx/html
 EXPOSE 3000
-
-# Iniciar o servidor de desenvolvimento
-CMD ["npm", "start"]
+CMD ["nginx", "-g", "daemon off;"]
