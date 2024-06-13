@@ -318,3 +318,4 @@ C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\bin\Debug\net8.0\out\out\out\out\apps
 C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\bin\Debug\net8.0\out\out\out\out\appsettings.json
 C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\bin\Debug\net8.0\out\out\out\out\WebAPI.deps.json
 C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\bin\Debug\net8.0\out\out\out\out\WebAPI.runtimeconfig.json
+C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\bin\Debug\net8.0\RabbitMQ.Client.dll

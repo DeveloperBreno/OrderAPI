@@ -3,7 +3,6 @@ using Entidades.Entidades;
 using Insfraestrutura.Configuracoes;
 using Insfraestrutura.Repositorio.Genericos;
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Insfraestrutura.Repositorio;
 
@@ -32,7 +31,7 @@ public class RepositorioUsuario : RepositorioGenerico<ApplicationUser>, IUsuario
             await _context.SaveChangesAsync();
 
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return false;
         }
@@ -53,14 +52,14 @@ public class RepositorioUsuario : RepositorioGenerico<ApplicationUser>, IUsuario
         var user = await _context.ApplicationUser.Where(o => o.Email.Equals(email))
             .AsNoTracking()
             .FirstOrDefaultAsync();
-        
+
         return user.Id;
-            
+
     }
 
     public async Task<string> RetornaONomeDoUsuarioPorId(string idUsuario)
     {
-        var user =  await _context.ApplicationUser.Where(o => o.Id.Equals(idUsuario))
+        var user = await _context.ApplicationUser.Where(o => o.Id.Equals(idUsuario))
           .AsNoTracking()
           .FirstAsync();
         return user?.UserName ?? "Usuário não encontrado.";

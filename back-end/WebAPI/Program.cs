@@ -13,6 +13,9 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using WebAPI.Token;
+using Dominio.Interfaces.Filas;
+using Insfraestrutura.Filas;
+using RabbitMQ.Client;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,6 +53,20 @@ builder.Services.AddScoped<IServicoNoticia, ServicoNoticia>();
 // Interface aplicação
 builder.Services.AddScoped<IAplicacaoNoticia, AplicacaoNoticia>();
 builder.Services.AddScoped<IAplicacaoUsuario, AplicacaoUsuario>();
+
+// Configurar RabbitMQ
+builder.Services.AddSingleton<IConnection>(sp =>
+{
+    var factory = new ConnectionFactory
+    {
+        HostName = "localhost", // substitua pelo hostname do RabbitMQ
+        UserName = "guest", // substitua pelo username do RabbitMQ
+        Password = "guest" // substitua pelo password do RabbitMQ
+    };
+    return factory.CreateConnection();
+});
+
+builder.Services.AddScoped<IInsereNaFila, InserirNaFila>();
 
 // JWT
 // muda no usuarioController tambem
