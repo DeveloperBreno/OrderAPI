@@ -10,14 +10,14 @@
         "projectUniqueName": "C:\\DEV\\cursoReact\\OrderAPI\\back-end\\Aplicacao\\Aplicacao.csproj",
         "projectName": "Aplicacao",
         "projectPath": "C:\\DEV\\cursoReact\\OrderAPI\\back-end\\Aplicacao\\Aplicacao.csproj",
-        "packagesPath": "C:\\Users\\Gabriel.França\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\45781005889\\.nuget\\packages\\",
         "outputPath": "C:\\DEV\\cursoReact\\OrderAPI\\back-end\\Aplicacao\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Gabriel.França\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\45781005889\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -74,11 +74,6 @@
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
         }
-      },
-      "runtimes": {
-        "linux-x64": {
-          "#import": []
-        }
       }
     },
     "C:\\DEV\\cursoReact\\OrderAPI\\back-end\\Dominio\\Dominio.csproj": {
@@ -87,14 +82,14 @@
         "projectUniqueName": "C:\\DEV\\cursoReact\\OrderAPI\\back-end\\Dominio\\Dominio.csproj",
         "projectName": "Dominio",
         "projectPath": "C:\\DEV\\cursoReact\\OrderAPI\\back-end\\Dominio\\Dominio.csproj",
-        "packagesPath": "C:\\Users\\Gabriel.França\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\45781005889\\.nuget\\packages\\",
         "outputPath": "C:\\DEV\\cursoReact\\OrderAPI\\back-end\\Dominio\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Gabriel.França\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\45781005889\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -148,11 +143,6 @@
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
         }
-      },
-      "runtimes": {
-        "linux-x64": {
-          "#import": []
-        }
       }
     },
     "C:\\DEV\\cursoReact\\OrderAPI\\back-end\\Enditades\\Entidades.csproj": {
@@ -161,14 +151,14 @@
         "projectUniqueName": "C:\\DEV\\cursoReact\\OrderAPI\\back-end\\Enditades\\Entidades.csproj",
         "projectName": "Entidades",
         "projectPath": "C:\\DEV\\cursoReact\\OrderAPI\\back-end\\Enditades\\Entidades.csproj",
-        "packagesPath": "C:\\Users\\Gabriel.França\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\45781005889\\.nuget\\packages\\",
         "outputPath": "C:\\DEV\\cursoReact\\OrderAPI\\back-end\\Enditades\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Gabriel.França\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\45781005889\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -247,11 +237,6 @@
             }
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
-        }
-      },
-      "runtimes": {
-        "linux-x64": {
-          "#import": []
         }
       }
     }

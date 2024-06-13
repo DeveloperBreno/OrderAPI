@@ -7,4 +7,5 @@ public interface IAplicacaoUsuario
     Task<bool> ExisteUsuario(string email, string senha);
 
     Task<string> RetornaIdUsuario(string email);
+    Task<string> RetornaONomeDoUsuarioPorId(string idUsuario);
 }

@@ -57,4 +57,12 @@ public class RepositorioUsuario : RepositorioGenerico<ApplicationUser>, IUsuario
         return user.Id;
             
     }
+
+    public async Task<string> RetornaONomeDoUsuarioPorId(string idUsuario)
+    {
+        var user =  await _context.ApplicationUser.Where(o => o.Id.Equals(idUsuario))
+          .AsNoTracking()
+          .FirstAsync();
+        return user?.UserName ?? "Usuário não encontrado.";
+    }
 }

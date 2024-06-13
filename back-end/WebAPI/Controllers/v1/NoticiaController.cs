@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Models;
 
-namespace WebAPI.Controllers;
+namespace WebAPI.Controllers.v1;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -21,7 +21,7 @@ public class NoticiaController : ControllerBase
         _IAplicacaoUsuario = iAplicacaoUsuario;
     }
 
-    
+
     [Authorize]
     [Produces("application/json")]
     [HttpPost("/Noticia/List")]
@@ -30,7 +30,7 @@ public class NoticiaController : ControllerBase
         return await _aplicacaoNoticia.ListarNoticiasAtivas();
     }
 
-    
+
     [Authorize]
     [Produces("application/json")]
     [HttpPost("/Noticia/Create")]
@@ -51,7 +51,7 @@ public class NoticiaController : ControllerBase
         return novaNoticia.Notificacoes;
     }
 
-    
+
     [Authorize]
     [Produces("application/json")]
     [HttpPost("/Update")]
@@ -60,14 +60,16 @@ public class NoticiaController : ControllerBase
         var novaNoticia = await _aplicacaoNoticia.BuscarPorId(noticiaModel.idNoticia);
         novaNoticia.Titulo = noticiaModel.Titulo;
         novaNoticia.Informacao = noticiaModel.Informacao;
+
         var email = User.Claims.FirstOrDefault().Subject.Name;
         var idUsuario = await _IAplicacaoUsuario.RetornaIdUsuario(email);
+
         novaNoticia.UsuarioId = idUsuario;
         await _aplicacaoNoticia.AtualizaNoticia(novaNoticia);
         return novaNoticia.Notificacoes;
     }
 
-    
+
     [Authorize]
     [Produces("application/json")]
     [HttpPost("/Delete")]

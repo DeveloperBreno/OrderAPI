@@ -154,6 +154,14 @@ C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\bin\Debug\net8.0\appsettings.Developm
 C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\bin\Debug\net8.0\appsettings.json
 C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\bin\Debug\net8.0\out\appsettings.Development.json
 C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\bin\Debug\net8.0\out\appsettings.json
+C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\bin\Debug\net8.0\out\out\appsettings.Development.json
+C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\bin\Debug\net8.0\out\out\appsettings.json
+C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\bin\Debug\net8.0\out\out\out\appsettings.Development.json
+C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\bin\Debug\net8.0\out\out\out\appsettings.json
+C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\bin\Debug\net8.0\out\out\out\WebAPI.deps.json
+C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\bin\Debug\net8.0\out\out\out\WebAPI.runtimeconfig.json
+C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\bin\Debug\net8.0\out\out\WebAPI.deps.json
+C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\bin\Debug\net8.0\out\out\WebAPI.runtimeconfig.json
 C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\bin\Debug\net8.0\out\WebAPI.deps.json
 C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\bin\Debug\net8.0\out\WebAPI.runtimeconfig.json
 C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\bin\Debug\net8.0\WebAPI.exe
@@ -281,9 +289,9 @@ C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\bin\Debug\net8.0\Dominio.dll
 C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\bin\Debug\net8.0\Entidades.dll
 C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\bin\Debug\net8.0\Insfraestrutura.dll
 C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\bin\Debug\net8.0\Aplicacao.pdb
+C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\bin\Debug\net8.0\Dominio.pdb
 C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\bin\Debug\net8.0\Entidades.pdb
 C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\bin\Debug\net8.0\Insfraestrutura.pdb
-C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\bin\Debug\net8.0\Dominio.pdb
 C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\obj\Debug\net8.0\WebAPI.csproj.AssemblyReference.cache
 C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\obj\Debug\net8.0\WebAPI.GeneratedMSBuildEditorConfig.editorconfig
 C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\obj\Debug\net8.0\WebAPI.AssemblyInfoInputs.cache
@@ -306,3 +314,7 @@ C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\obj\Debug\net8.0\refint\WebAPI.dll
 C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\obj\Debug\net8.0\WebAPI.pdb
 C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\obj\Debug\net8.0\WebAPI.genruntimeconfig.cache
 C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\obj\Debug\net8.0\ref\WebAPI.dll
+C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\bin\Debug\net8.0\out\out\out\out\appsettings.Development.json
+C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\bin\Debug\net8.0\out\out\out\out\appsettings.json
+C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\bin\Debug\net8.0\out\out\out\out\WebAPI.deps.json
+C:\DEV\cursoReact\OrderAPI\back-end\WebAPI\bin\Debug\net8.0\out\out\out\out\WebAPI.runtimeconfig.json

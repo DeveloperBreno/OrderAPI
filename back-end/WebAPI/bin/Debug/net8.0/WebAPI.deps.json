@@ -9,6 +9,7 @@
       "WebAPI/1.0.0": {
         "dependencies": {
           "Aplicacao": "1.0.0",
+          "Dominio": "1.0.0",
           "Entidades": "1.0.0",
           "Insfraestrutura": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.6",

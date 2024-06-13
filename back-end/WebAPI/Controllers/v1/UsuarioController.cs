@@ -10,7 +10,7 @@ using System.Text;
 using WebAPI.Models;
 using WebAPI.Token;
 
-namespace WebAPI.Controllers;
+namespace WebAPI.Controllers.v1;
 
 [ApiController]
 [Route("[controller]")]
@@ -33,10 +33,10 @@ public class UsuarioController : ControllerBase
         _logger = logger;
     }
 
-    
+
     [AllowAnonymous]
     [Produces("application/json")]
-    [HttpPost("/User/Create")]
+    [HttpPost("/v1/User/Create")]
     public async Task<IActionResult> AdicionaUsuarioIdentity([FromBody] Login login)
     {
         if (string.IsNullOrWhiteSpace(login.email) || string.IsNullOrWhiteSpace(login.senha))
@@ -71,10 +71,10 @@ public class UsuarioController : ControllerBase
             return Ok("Erro ao confirmar usuários");
     }
 
-    
+
     [AllowAnonymous]
     [Produces("application/json")]
-    [HttpPost("/User/Token")]
+    [HttpPost("/v1/User/Token")]
     public async Task<IActionResult> CriarTokenIdentity([FromBody] Login login)
     {
         if (string.IsNullOrWhiteSpace(login.email) || string.IsNullOrWhiteSpace(login.senha))
@@ -106,5 +106,18 @@ public class UsuarioController : ControllerBase
             return Unauthorized();
         }
 
+    }
+
+    [Authorize]
+    [Produces("application/json")]
+    [HttpGet("/v1/User/Info")]
+    public async Task<IActionResult> GetInfoAboutUser()
+    {
+        var email = User.Claims.FirstOrDefault().Subject.Name;
+        var idUsuario = await _IAplicacaoUsuario.RetornaIdUsuario(email);
+
+        var nomeDoUsuario = await _IAplicacaoUsuario.RetornaONomeDoUsuarioPorId(idUsuario);
+
+        return Ok(new { name = nomeDoUsuario });
     }
 }
