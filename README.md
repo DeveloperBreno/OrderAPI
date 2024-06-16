@@ -36,3 +36,27 @@ build:
 docker build -t react .
 start docker:
 docker run -p 3000:3000 react
+
+# DOCS
+## Cliete
+Cliente abre um link via whatsapp da loja ao por alguma rede social, monta um carrinho de compras depois disso pode fazer umcadastro caso não tenha ou pode fazer o login caso já tenha um caastro.
+
+## Pedido
+O cliente escolhe os produtos mas tambem pode adicionar itens adicionais isso é uma opçãp de sistema, todo o sub-item pode adicionar valor ao pedido.
+
+## Web service 
+processa o pedido para fazer um pagamento via PIX, de inicio teremos apenas o PIX como forma de pagamento, no futuro teremos todas as formas de pagamento e para cada loja terá suas configurações de pagamento como por exemplo: chave de api no mercado pago.
+
+## Loja
+A loja receberá um pedido de aprovação de cada pedido e terá a responsabilidade de entregar esse pedido, cada loja deve notificar o sistema que já está enviando o pedido (em trafego) assim o sistema deve informa ao cliente final que o pedido saiu da loja.
+
+cada loja pode montar um cardapio do dia, os cardapios podem ser pre-configurados e selecionados para cada dia diferente.
+
+cada loja deve informar a quantidade de produtos para produto no cardapio selecionado, assim o sistema atualizará a quantidade em estoque automaticamente.
+
+A loja deve informar as vendas fora do sistema para manter o controle de caixa e o estoque do produto atualizado.
+
+
+
+
+
