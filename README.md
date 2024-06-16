@@ -56,6 +56,17 @@ cada loja deve informar a quantidade de produtos para produto no cardapio seleci
 
 A loja deve informar as vendas fora do sistema para manter o controle de caixa e o estoque do produto atualizado.
 
+# Dominio cliente final
+
+## Endereço
+O cliente deverá informar o seu cep, logradouro, número e uma observação (opcional)
+
+## Contato
+O cliente deverá informar seu número de celular ou telefone fixo.
+
+## Pagamento 
+O cliente deve pagar seu pedido via mercado pago utilizando pix.
+Futuramente teremos todas as formas de pagamento.
 
 
 
