@@ -68,6 +68,17 @@ O cliente deverá informar seu número de celular ou telefone fixo.
 O cliente deve pagar seu pedido via mercado pago utilizando pix.
 Futuramente teremos todas as formas de pagamento.
 
+# Dominio loja
 
+Ao logista abrir o sistema deve informar o status da loja como por exemplo: Disponivel, Fechado.
 
+Ao abir a loja mudar o status para disponivel a loja deve informar os produtos e quantidade disponivel que irá vender no dia ou na virada do dia, podendo abrir as 18h e fechando as 1h da manha.
+
+Ao fechar o sistema automaticamente o sistema deve deixar o status como "Fechada" impedindo compras do cliente final.
+
+Caso a loja faça um pedido de venda fora do sistema deve informar o pedido pra atualizar o estoque e manter o fluxo de caixa atualizado.
+
+A loja pode ordenar os produos para o cliente final.
+
+A loja pode deixar uma observação e uma observação pequena, um titulo, até duas fotos (isso não pode ser hardcode, podendo ter alterações futuras).
 
