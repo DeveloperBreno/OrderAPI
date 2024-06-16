@@ -68,8 +68,11 @@ O cliente deverá informar seu número de celular ou telefone fixo.
 O cliente deve pagar seu pedido via mercado pago utilizando pix.
 Futuramente teremos todas as formas de pagamento.
 
-# Dominio loja
+## pedidos
+O cliente pode ver o historico de pedidos.
+Pode acompanhar seus pedido em tempo real, exemplo: pedido em andamento na loja > pedido a caminho > entregue.
 
+# Dominio loja
 Ao logista abrir o sistema deve informar o status da loja como por exemplo: Disponivel, Fechado.
 
 Ao abir a loja mudar o status para disponivel a loja deve informar os produtos e quantidade disponivel que irá vender no dia ou na virada do dia, podendo abrir as 18h e fechando as 1h da manha.
