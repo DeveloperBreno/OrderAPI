@@ -5,8 +5,60 @@ import Login from './components/partials/Login';
 import Register from './components/partials/Register';
 import Lojas from './components/partials/Lojas';
 import TemporaryMessage from './components/alerts/TemporaryMessage';
+import * as signalR from '@microsoft/signalr';
 
 function App() {
+
+  const [connection, setConnection] = useState(null);
+  const [messages, setMessages] = useState([]);
+
+
+  useEffect(() => {
+    // URL do servidor SignalR
+    const serverUrl = 'http://localhost:5081'; // Substitua pelo endereço do seu servidor SignalR
+
+    const newConnection = new signalR.HubConnectionBuilder()
+      .withUrl(`${serverUrl}/chatHub`)  // Substitua "/chatHub" pelo seu endpoint de hub
+      .build();
+
+    setConnection(newConnection);
+  }, []);
+
+  useEffect(() => {
+    if (connection) {
+      // Define um método para receber mensagens do servidor
+      connection.on('ReceiveMessage', (message) => {
+        setMessages(prevMessages => [...prevMessages, message]);
+      });
+
+      // Inicia a conexão com o servidor SignalR
+      connection.start()
+        .then(() => {
+          debugger;
+          console.log('Conectado ao servidor SignalR');
+
+        })
+        .catch((error) => console.error(`Erro ao conectar ao servidor SignalR: ${error}`));
+
+      return () => {
+        // Fecha a conexão ao desmontar o componente
+        connection.stop()
+          .then(() => console.log('Conexão SignalR encerrada'))
+          .catch((error) => console.error(`Erro ao encerrar conexão SignalR: ${error}`));
+      };
+    }
+  }, [connection]);
+
+  const sendMessage = async () => {
+    try {
+      // Exemplo de envio de mensagem para o servidor
+      await connection.invoke('SendMessage', 'ReactNativeClient', 'Olá do cliente React Native!');
+    } catch (error) {
+      console.error(`Erro ao enviar mensagem para o servidor SignalR: ${error}`);
+    }
+  };
+
+
 
   const [showMessage, setShowMessage] = useState(false);
   const [messageText, setMessageText] = useState('');
@@ -131,7 +183,7 @@ function App() {
 
 
       let headersList = {
-        "User-Agent": "Thunder Client (http://localhost:3000)",
+        "User-Agent": "Thunder Client (http://localhost:5081)",
         "accept": "*/*",
         "Content-Type": "application/json"
       }
@@ -143,7 +195,7 @@ function App() {
         "nascimento": "2024-06-13T00:33:09.644Z"
       });
 
-      let response = await fetch("http://localhost:5000/User/Token", {
+      let response = await fetch("http://localhost:5081/User/Token", {
         method: "POST",
         body: bodyContent,
         headers: headersList,
@@ -169,6 +221,14 @@ function App() {
   return (
     <div>
       {showMessage && <TemporaryMessage message={messageText} />}
+
+      <div style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <p>Messages:</p>
+        {messages.map((msg, index) => (
+          <p key={index}>{msg}</p>
+        ))}
+        <button value="Enviar Mensagem" onProgress={() => sendMessage()} > Enviar </button>
+      </div>
 
       <>
         <div className='container'>

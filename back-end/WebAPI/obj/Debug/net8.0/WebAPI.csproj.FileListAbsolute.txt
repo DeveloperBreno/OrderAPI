@@ -496,3 +496,5 @@ C:\dev\OrderAPI\OrderAPI\back-end\WebAPI\obj\Debug\net8.0\refint\WebAPI.dll
 C:\dev\OrderAPI\OrderAPI\back-end\WebAPI\obj\Debug\net8.0\WebAPI.pdb
 C:\dev\OrderAPI\OrderAPI\back-end\WebAPI\obj\Debug\net8.0\WebAPI.genruntimeconfig.cache
 C:\dev\OrderAPI\OrderAPI\back-end\WebAPI\obj\Debug\net8.0\ref\WebAPI.dll
+C:\dev\OrderAPI\OrderAPI\back-end\WebAPI\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\dev\OrderAPI\OrderAPI\back-end\WebAPI\bin\Debug\net8.0\System.Net.WebSockets.WebSocketProtocol.dll
