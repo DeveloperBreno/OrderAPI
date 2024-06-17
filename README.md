@@ -1,109 +1,124 @@
-# Todas a documentação e dominio do negocio serão escritas aqui
-
-## mongo
+#Toda a documentação e domínio do negócio serão escritos aqui
+## MongoDB
 docker pull mongo
+
 docker run -d --name mongodb-container -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=sua_senha_segura mongo
 
-para logar em algum gerenciado de banco nao relacional
-recomendo usar o NoSqlBooster
+Para logar em algum gerenciador de banco não relacional, recomendo usar o NoSQLBooster:
+
 mongodb://admin:sua_senha_segura@localhost:27017
 
-## redis
+## Redis
 docker pull redis
-docker run -d --name redis-container -p 6379:6379 redis
-acesse: redis://localhost:6379
 
-## rabbitqm services
+docker run -d --name redis-container -p 6379:6379 redis
+
+Acesse: redis://localhost:6379
+
+## RabbitMQ Services
 docker pull rabbitmq:3.11-management
+
 docker run -d --hostname rabbitmq --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.11-management
+
 http://localhost:15672
 
 ## WebAPI
-via terminal, na pasta: WebAPI
-faz build:
-dotnet publish -c Release -o ./out --runtime linux-x64
-construir imagem: 
-docker build -t api .
-iniciar:
-docker run -p 5000:5000 api
-depois acesse: http://localhost:5000/swagger/index.html
+Via terminal, na pasta: WebAPI
 
-## front
-antes de buildar a imagem faz o teste do build do react:
+Faz build:
+
+dotnet publish -c Release -o ./out --runtime linux-x64
+
+Construir imagem:
+
+docker build -t api .
+
+Iniciar:
+
+docker run -p 5000:5000 api
+
+Depois acesse: http://localhost:5000/swagger/index.html
+
+## Front-end
+Antes de buildar a imagem, faça o teste do build do React:
+
 npm run build
-se tudo der certo continue
-build:
+
+Se tudo der certo, continue.
+
+Build:
+
 docker build -t react .
-start docker:
+
+Iniciar Docker:
+
 docker run -p 3000:3000 react
 
 # DOCS
-## Cliete
-Cliente abre um link via whatsapp da loja ao por alguma rede social, monta um carrinho de compras depois disso pode fazer umcadastro caso não tenha ou pode fazer o login caso já tenha um caastro.
+Cliente
+O cliente abre um link via WhatsApp da loja ou por alguma rede social, monta um carrinho de compras. Depois disso, pode fazer um cadastro caso não tenha ou pode fazer o login caso já tenha um cadastro.
 
 ## Pedido
-O cliente escolhe os produtos mas tambem pode adicionar itens adicionais isso é uma opçãp de sistema, todo o sub-item pode adicionar valor ao pedido.
+O cliente escolhe os produtos, mas também pode adicionar itens adicionais. Isso é uma opção do sistema. Todo sub-item pode adicionar valor ao pedido.
 
-## Web service 
-processa o pedido para fazer um pagamento via PIX, de inicio teremos apenas o PIX como forma de pagamento, no futuro teremos todas as formas de pagamento e para cada loja terá suas configurações de pagamento como por exemplo: chave de api no mercado pago.
+## Web Service
+Processa o pedido para fazer um pagamento via PIX. De início, teremos apenas o PIX como forma de pagamento. No futuro, teremos todas as formas de pagamento, e para cada loja, terá suas configurações de pagamento, como por exemplo: chave de API no Mercado Pago.
 
 ## Loja
-A loja receberá um pedido de aprovação de cada pedido e terá a responsabilidade de entregar esse pedido, cada loja deve notificar o sistema que já está enviando o pedido (em trafego) assim o sistema deve informa ao cliente final que o pedido saiu da loja.
+A loja receberá um pedido de aprovação de cada pedido e terá a responsabilidade de entregar esse pedido. Cada loja deve notificar o sistema que já está enviando o pedido (em tráfego), assim o sistema deve informar ao cliente final que o pedido saiu da loja.
 
-cada loja pode montar um cardapio do dia, os cardapios podem ser pre-configurados e selecionados para cada dia diferente.
+Cada loja pode montar um cardápio do dia. Os cardápios podem ser pré-configurados e selecionados para cada dia diferente.
 
-cada loja deve informar a quantidade de produtos para produto no cardapio selecionado, assim o sistema atualizará a quantidade em estoque automaticamente.
+Cada loja deve informar a quantidade de produtos para cada produto no cardápio selecionado, assim o sistema atualizará a quantidade em estoque automaticamente.
 
 A loja deve informar as vendas fora do sistema para manter o controle de caixa e o estoque do produto atualizado.
 
-# Dominio cliente final
-
+# Domínio Cliente Final
 ## Endereço
-O cliente deverá informar o seu cep, logradouro, número e uma observação (opcional)
+O cliente deverá informar o seu CEP, logradouro, número e uma observação (opcional).
 
 ## Contato
 O cliente deverá informar seu número de celular ou telefone fixo.
 
-## Pagamento 
-O cliente deve pagar seu pedido via mercado pago utilizando pix.
-Futuramente teremos todas as formas de pagamento.
+## Pagamento
+O cliente deve pagar seu pedido via Mercado Pago utilizando PIX. Futuramente, teremos todas as formas de pagamento.
 
-## pedidos
-O cliente pode ver o historico de pedidos.
-Pode acompanhar seus pedido em tempo real, exemplo: pedido em andamento na loja > pedido a caminho > entregue.
+## Pedidos
+O cliente pode ver o histórico de pedidos.
 
-# Dominio loja
+Pode acompanhar seus pedidos em tempo real, exemplo: pedido em andamento na loja > pedido a caminho > entregue.
 
+# Domínio Loja
 ## Status
-O logista deve abrir o sistema deve informar o status da loja como por exemplo: Disponivel, Fechado.
+O logista deve abrir o sistema e informar o status da loja, como por exemplo: Disponível, Fechado.
 
-Ao abir a loja mudar o status para disponivel a loja deve informar os produtos e quantidade disponivel que irá vender no dia ou na virada do dia, podendo abrir as 18h e fechando as 1h da manha.
+Ao abrir a loja e mudar o status para disponível, a loja deve informar os produtos e quantidade disponível que irá vender no dia ou na virada do dia, podendo abrir às 18h e fechando às 1h da manhã.
 
-Ao fechar o sistema automaticamente o sistema deve deixar o status como "Fechada" impedindo compras do cliente final.
+Ao fechar o sistema, automaticamente o sistema deve deixar o status como "Fechada", impedindo compras do cliente final.
 
-## Vendas externas
-Caso a loja faça um pedido de venda fora do sistema deve informar o pedido pra atualizar o estoque e manter o fluxo de caixa atualizado.
+## Vendas Externas
+Caso a loja faça um pedido de venda fora do sistema, deve informar o pedido para atualizar o estoque e manter o fluxo de caixa atualizado.
 
 ## Divulgação
-A loja pode ordenar os produos para o cliente final.
+A loja pode ordenar os produtos para o cliente final.
 
-A loja pode deixar uma observação e uma observação pequena, um titulo, até duas fotos (isso não pode ser hardcode, podendo ter alterações futuras).
+A loja pode deixar uma observação e uma observação pequena, um título, até duas fotos (isso não pode ser hardcode, podendo ter alterações futuras).
 
-# Dominio WEB SERVICES
-## Cliente final
+# Domínio Web Services
+## Cliente Final
 Deve ser salvo na base de dados.
 
-## Pedidos 
-Serão salvos mas nunca alterados
+## Pedidos
+Serão salvos, mas nunca alterados.
 
-## Pedido finalizado
-Deve informar a loja, via real time SignalR
+## Pedido Finalizado
+Deve informar a loja, via real-time SignalR.
 
 ## Pagamentos
-Salvos em uma base de dados mas nunca alterados, nesse ponto poderá utilizar banco não relacional apenas utilizando alguns campos como id externos como UserId, lojaId.
+Salvos em uma base de dados, mas nunca alterados. Nesse ponto, poderá utilizar banco não relacional, apenas utilizando alguns campos como IDs externos, como UserId, lojaId.
 
-## Pedido a caminho
-O logista deve iformar ao sistema que deve informar / atualizar o status do pedido na tela do cliente final.
+## Pedido a Caminho
+O logista deve informar ao sistema que deve informar/atualizar o status do pedido na tela do cliente final.
 
-## cliente final
+## Cliente Final
 Pode ver seus pedidos com seus status atualizados em tempo real.
