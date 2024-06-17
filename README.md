@@ -89,3 +89,21 @@ A loja pode ordenar os produos para o cliente final.
 
 A loja pode deixar uma observação e uma observação pequena, um titulo, até duas fotos (isso não pode ser hardcode, podendo ter alterações futuras).
 
+# Dominio WEB SERVICES
+## Cliente final
+Deve ser salvo na base de dados.
+
+## Pedidos 
+Serão salvos mas nunca alterados
+
+## Pedido finalizado
+Deve informar a loja, via real time SignalR
+
+## Pagamentos
+Salvos em uma base de dados mas nunca alterados, nesse ponto poderá utilizar banco não relacional apenas utilizando alguns campos como id externos como UserId, lojaId.
+
+## Pedido a caminho
+O logista deve iformar ao sistema que deve informar / atualizar o status do pedido na tela do cliente final.
+
+## cliente final
+Pode ver seus pedidos com seus status atualizados em tempo real.
