@@ -96,7 +96,7 @@ Ao abrir a loja e mudar o status para disponível, a loja deve informar os produ
 
 Ao fechar o sistema, automaticamente o sistema deve deixar o status como "Fechada", impedindo compras do cliente final.
 
-## Vendas Externas
+## Vendas Externas (vendas por fora do sistema online)
 Caso a loja faça um pedido de venda fora do sistema, deve informar o pedido para atualizar o estoque e manter o fluxo de caixa atualizado.
 
 ## Divulgação
