@@ -173,11 +173,7 @@ function App() {
       <>
         <div className='container'>
           <div className='row'>
-
-
-
             <div className='col-md-2'>
-
               {pathParam === '' ? (
                 <div className='col-md-1'>
 

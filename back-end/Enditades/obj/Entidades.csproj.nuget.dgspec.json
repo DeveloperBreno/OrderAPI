@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\DEV\\cursoReact\\OrderAPI\\back-end\\Enditades\\Entidades.csproj": {}
+    "C:\\dev\\OrderAPI\\OrderAPI\\back-end\\Enditades\\Entidades.csproj": {}
   },
   "projects": {
-    "C:\\DEV\\cursoReact\\OrderAPI\\back-end\\Enditades\\Entidades.csproj": {
+    "C:\\dev\\OrderAPI\\OrderAPI\\back-end\\Enditades\\Entidades.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\DEV\\cursoReact\\OrderAPI\\back-end\\Enditades\\Entidades.csproj",
+        "projectUniqueName": "C:\\dev\\OrderAPI\\OrderAPI\\back-end\\Enditades\\Entidades.csproj",
         "projectName": "Entidades",
-        "projectPath": "C:\\DEV\\cursoReact\\OrderAPI\\back-end\\Enditades\\Entidades.csproj",
+        "projectPath": "C:\\dev\\OrderAPI\\OrderAPI\\back-end\\Enditades\\Entidades.csproj",
         "packagesPath": "C:\\Users\\45781005889\\.nuget\\packages\\",
-        "outputPath": "C:\\DEV\\cursoReact\\OrderAPI\\back-end\\Enditades\\obj\\",
+        "outputPath": "C:\\dev\\OrderAPI\\OrderAPI\\back-end\\Enditades\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
           "C:\\Users\\45781005889\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -95,7 +91,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
