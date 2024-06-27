@@ -8,6 +8,13 @@ Para logar em algum gerenciador de banco não relacional, recomendo usar o NoSQL
 
 mongodb://admin:sua_senha_segura@localhost:27017
 
+## PostgreSQL
+1. Pull e Run do contêiner do PostgreSQL
+docker run -e "POSTGRES_PASSWORD=MyStrongPassword" -e "POSTGRES_DB=MyDatabase" -p 5432:5432 --name postgres -d postgres:latest
+
+2. Run da aplicação .NET vinculando ao contêiner do PostgreSQL
+docker run -e "ConnectionStrings__DefaultConnection=Host=postgres;Database=MyDatabase;Username=postgres;Password=MyStrongPassword" -p 8080:80 --name webapp --link postgres:postgres my-application-image
+
 ## Redis
 docker pull redis
 
