@@ -31,13 +31,33 @@ public class RepositorioUsuario : RepositorioGenerico<ApplicationUser>, IUsuario
             await _context.SaveChangesAsync();
 
         }
-        catch (Exception)
+        catch (DbUpdateException ex)
         {
-            return false;
+            var innerException = ex.InnerException;
+            // Verifica se é uma exceção de falha transitória específica, se necessário
+            if (IsTransientFailure(innerException))
+            {
+                // Implemente lógica de retentativa aqui, se aplicável
+                // Exemplo: aguarde um tempo e tente novamente
+                await Task.Delay(TimeSpan.FromSeconds(5));
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                // Lidar com outras falhas de forma apropriada
+                throw;
+            }
         }
 
         return true;
 
+    }
+
+    bool IsTransientFailure(Exception ex)
+    {
+        // Implemente lógica para verificar se a exceção é devido a uma falha transitória
+        // Exemplo: verifica se a exceção é do tipo de timeout de conexão, etc.
+        return false;
     }
 
     public async Task<bool> ExisteUsuario(string email, string senha)
