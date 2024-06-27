@@ -1,3 +1,5 @@
+using Aplicacao.Aplicacoes;
+using Aplicacao.Interfaces;
 using Dominio.Interfaces;
 using Dominio.Interfaces.Filas;
 using Dominio.Interfaces.Genericos;
@@ -5,89 +7,75 @@ using Dominio.Interfaces.InterfaceServicos;
 using Dominio.Servicos;
 using Insfraestrutura.Filas;
 using Insfraestrutura.Repositorio;
-using Insfraestrutura.Repositorio.Genericos;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RabbitMQ.Client;
-using Aplicacao.Interfaces;
-using Aplicacao.Aplicacoes;
+using System;
+using System.Threading.Tasks;
 
-namespace Testes;
-
-// TestDependencyInjection.cs
-public static class TestDependencyInjection
+namespace Testes
 {
-    public static IServiceProvider BuildServiceProvider()
+    // Configuração de injeção de dependência para os testes
+    public static class TestDependencyInjection
     {
-        var services = new ServiceCollection();
-
-        // Registre as dependências necessárias
-        services.AddScoped<IServicoNoticia, ServicoNoticia>();
-        services.AddScoped<INoticia, RepositorioNoticia>();
-
-        //// Adiciona os serviços de Identity
-        //services.AddIdentity<ApplicationUser, IdentityRole>()
-        //    .AddEntityFrameworkStores<Contexto>()
-        //    .AddDefaultTokenProviders();
-
-        // Interface e repositório
-        services.AddScoped(typeof(IGenericos<>), typeof(RepositorioGenerico<>));
-        services.AddScoped(typeof(INoticia), typeof(RepositorioNoticia));
-        services.AddScoped(typeof(IUsuario), typeof(RepositorioUsuario));
-
-        // Serviço domínio
-        services.AddScoped<IServicoNoticia, ServicoNoticia>();
-
-        // Interface aplicação
-        services.AddScoped<IAplicacaoNoticia, AplicacaoNoticia>();
-        services.AddScoped<IAplicacaoUsuario, AplicacaoUsuario>();
-
-        // Configurar RabbitMQ
-        services.AddSingleton<IConnection>(sp =>
+        public static IServiceProvider BuildServiceProvider()
         {
-            var factory = new ConnectionFactory
+            var services = new ServiceCollection();
+
+            // Serviço de notícia
+            services.AddScoped<IServicoNoticia, ServicoNoticia>();
+            services.AddScoped<INoticia, RepositorioNoticia>();
+
+            // Configuração RabbitMQ
+            services.AddSingleton<IConnection>(sp =>
             {
-                HostName = "localhost", // substitua pelo hostname do RabbitMQ
-                UserName = "guest", // substitua pelo username do RabbitMQ
-                Password = "guest" // substitua pelo password do RabbitMQ
-            };
-            return factory.CreateConnection();
-        });
+                var factory = new ConnectionFactory
+                {
+                    HostName = "localhost", // substitua pelo hostname do RabbitMQ
+                    UserName = "guest",     // substitua pelo username do RabbitMQ
+                    Password = "guest"      // substitua pelo password do RabbitMQ
+                };
+                return factory.CreateConnection();
+            });
 
-        services.AddScoped<IInsereNaFila, InserirNaFila>();
+            services.AddScoped<IInsereNaFila, InserirNaFila>();
 
-        return services.BuildServiceProvider();
-    }
-}
+            // Interface aplicação de usuário
+            services.AddScoped<IAplicacaoUsuario, AplicacaoUsuario>();
+            services.AddScoped<IUsuario, RepositorioUsuario>();
+            services.AddScoped(typeof(IUsuario), typeof(RepositorioUsuario));
 
+            services.AddScoped<IAplicacaoNoticia, AplicacaoNoticia>();
+            services.AddScoped<IAplicacaoUsuario, AplicacaoUsuario>();
 
-[TestClass]
-public class ServicoNoticiaTests
-{
-    private readonly IServicoNoticia _servicoNoticia;
-    private readonly IAplicacaoUsuario _aplicacaoUsuario;
+            return services.BuildServiceProvider();
 
-    public ServicoNoticiaTests()
-    {
-        var serviceProvider = TestDependencyInjection.BuildServiceProvider();
-        _servicoNoticia = serviceProvider.GetRequiredService<IServicoNoticia>();
-        _aplicacaoUsuario = serviceProvider.GetRequiredService<IAplicacaoUsuario>();
+        }
     }
 
-    [TestMethod]
-    public async void ObterNoticias_DeveRetornarTodasAsNoticias()
+    // Testes unitários usando MSTest
+    [TestClass]
+    public class ServicoNoticiaTests
     {
-        var noticias = await _servicoNoticia.ListarNoticiasAtivas();
+        private readonly IServicoNoticia _servicoNoticia;
+        private readonly IAplicacaoUsuario _aplicacaoUsuario;
+        private readonly IUsuario _usuario;
 
-        // Assert
-        Assert.IsNotNull(noticias);
-    }
+        public ServicoNoticiaTests()
+        {
+            var serviceProvider = TestDependencyInjection.BuildServiceProvider();
+            _servicoNoticia = serviceProvider.GetRequiredService<IServicoNoticia>();
+            _aplicacaoUsuario = serviceProvider.GetRequiredService<IAplicacaoUsuario>();
+            _usuario = serviceProvider.GetRequiredService<IUsuario>();
+        }
 
-    [TestMethod]
-    public async void ObterUsuario()
-    {
-        var user = await _aplicacaoUsuario.RetornaIdUsuario("developerbreno@gmail.com");
+        [TestMethod]
+        public void CriaUsuarioAsync()
+        {
+            var result = _aplicacaoUsuario.AdicionarUsuario("userteste@gmail.com", "123456", new DateTime(1997, 3, 20), "11977300114", "Teste").Result;
 
-        // Assert
-        Assert.IsNotNull(user);
+            // Assert
+            Assert.IsTrue(result);
+        }
     }
 }
