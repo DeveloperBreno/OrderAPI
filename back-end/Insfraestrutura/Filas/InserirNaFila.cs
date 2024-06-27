@@ -1,6 +1,8 @@
 ﻿using Dominio.Interfaces.Filas;
 using RabbitMQ.Client;
 using System.Text;
+using Newtonsoft.Json;
+
 
 namespace Insfraestrutura.Filas
 {
@@ -17,19 +19,17 @@ namespace Insfraestrutura.Filas
 
         public void Inserir(object obj, string nomeDaFila)
         {
-            string fila = nomeDaFila.ToString();
 
-            // Converta o objeto para uma mensagem apropriada
-            var messageBody = Encoding.UTF8.GetBytes(obj.ToString());
+            var messageBody = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(obj));
 
             _channel.QueueDeclare(
-                    queue: fila,
+                    queue: nomeDaFila,
                     durable: true,
                     exclusive: false,
                     autoDelete: false,
                     arguments: null);
 
-            _channel.BasicPublish(exchange: "", routingKey: fila, basicProperties: null, body: messageBody);
+            _channel.BasicPublish(exchange: "", routingKey: nomeDaFila, basicProperties: null, body: messageBody);
         }
     }
 }

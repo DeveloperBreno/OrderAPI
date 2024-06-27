@@ -35,7 +35,7 @@ string connectionString = builder.Configuration.GetConnectionString("DefaultConn
 
 // Adiciona o DbContext ao contêiner de serviços
 builder.Services.AddDbContext<Contexto>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseNpgsql(connectionString));
 
 // Adiciona os serviços de Identity
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -59,9 +59,9 @@ builder.Services.AddSingleton<IConnection>(sp =>
 {
     var factory = new ConnectionFactory
     {
-        HostName = "localhost", // substitua pelo hostname do RabbitMQ
-        UserName = "guest", // substitua pelo username do RabbitMQ
-        Password = "guest" // substitua pelo password do RabbitMQ
+        HostName = "localhost", 
+        UserName = "guest", 
+        Password = "guest" 
     };
     return factory.CreateConnection();
 });

@@ -18,7 +18,7 @@ public class Contexto : IdentityDbContext<ApplicationUser>
     {
         if (!optionsBuilder.IsConfigured)
         {
-            optionsBuilder.UseSqlServer(ObterStringConexao());
+            optionsBuilder.UseNpgsql(ObterStringConexao());
             base.OnConfiguring(optionsBuilder);
         }
     }
@@ -32,9 +32,7 @@ public class Contexto : IdentityDbContext<ApplicationUser>
 
     public string ObterStringConexao()
     {
-        string strCon = "Data Source=192.168.197.180;Initial Catalog=API_DDD;User Id=sa;Password=boein@747; TrustServerCertificate=True; Connect Timeout=180";
-
-        return strCon;
+        return "Host=localhost;Port=5432;Database=MyDatabase;Username=postgres;Password=SuaSenha";
     }
 
 }
