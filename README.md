@@ -15,6 +15,8 @@ docker run -e "POSTGRES_PASSWORD=MyStrongPassword" -e "POSTGRES_DB=MyDatabase" -
 ### 2. Run da aplicação .NET vinculando ao contêiner do PostgreSQL
 docker run -e "ConnectionStrings__DefaultConnection=Host=postgres;Database=MyDatabase;Username=postgres;Password=MyStrongPassword" -p 8080:80 --name webapp --link postgres:postgres my-application-image
 
+### baixe o pg admin para gerenciar o banco de dados postgres sql
+
 ## Redis
 docker pull redis
 
