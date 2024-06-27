@@ -14,7 +14,7 @@ public class RepositorioUsuario : RepositorioGenerico<ApplicationUser>, IUsuario
         _context = new Contexto(new DbContextOptionsBuilder<Contexto>().Options);
     }
 
-    public async Task<bool> AdicionarUsuario(string email, string senha, DateTime nascimento, string celular)
+    public async Task<bool> AdicionarUsuario(string email, string senha, DateTime nascimento, string celular, string userName)
     {
 
         try
@@ -24,7 +24,10 @@ public class RepositorioUsuario : RepositorioGenerico<ApplicationUser>, IUsuario
                 Celular = celular,
                 PasswordHash = senha,
                 DataDeNascimento = nascimento,
-                Email = email
+                Email = email,
+                NormalizedEmail = email.ToUpper(),
+                UserName = userName,
+                NormalizedUserName = userName.ToUpper()
             };
 
             await _context.AddAsync(usuario);
@@ -33,32 +36,15 @@ public class RepositorioUsuario : RepositorioGenerico<ApplicationUser>, IUsuario
         }
         catch (DbUpdateException ex)
         {
-            var innerException = ex.InnerException;
-            // Verifica se é uma exceção de falha transitória específica, se necessário
-            if (IsTransientFailure(innerException))
-            {
-                // Implemente lógica de retentativa aqui, se aplicável
-                // Exemplo: aguarde um tempo e tente novamente
-                await Task.Delay(TimeSpan.FromSeconds(5));
-                await _context.SaveChangesAsync();
-            }
-            else
-            {
-                // Lidar com outras falhas de forma apropriada
-                throw;
-            }
+
+            // Lidar com outras falhas de forma apropriada
+            throw ex;
         }
 
         return true;
 
     }
 
-    bool IsTransientFailure(Exception ex)
-    {
-        // Implemente lógica para verificar se a exceção é devido a uma falha transitória
-        // Exemplo: verifica se a exceção é do tipo de timeout de conexão, etc.
-        return false;
-    }
 
     public async Task<bool> ExisteUsuario(string email, string senha)
     {

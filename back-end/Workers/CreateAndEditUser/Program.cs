@@ -96,7 +96,7 @@ class Program
 
     static async Task ProcessarItemAsync(ApplicationUser applicationUser, IAplicacaoUsuario aplicacaoUsuario)
     {
-        await aplicacaoUsuario.AdicionarUsuario(applicationUser.Email, applicationUser.PasswordHash, applicationUser.DataDeNascimento, applicationUser.Celular);
+        await aplicacaoUsuario.AdicionarUsuario(applicationUser.Email, applicationUser.PasswordHash, applicationUser.DataDeNascimento, applicationUser.Celular, applicationUser.NormalizedUserName);
     }
 
     static void RepublisarMensagem(IModel channel, string queueName, string message)

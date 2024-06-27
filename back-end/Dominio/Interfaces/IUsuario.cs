@@ -4,7 +4,7 @@ namespace Dominio.Interfaces;
 
 public interface IUsuario
 {
-    Task<bool> AdicionarUsuario(string email, string senha, DateTime nascimento, string celular);
+    Task<bool> AdicionarUsuario(string email, string senha, DateTime nascimento, string celular, string userName);
 
     Task<bool> ExisteUsuario(string email, string senha);
 

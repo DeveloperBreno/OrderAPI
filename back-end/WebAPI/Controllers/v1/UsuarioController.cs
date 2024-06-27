@@ -49,6 +49,9 @@ public class UsuarioController : ControllerBase
             Email = login.email,
             Celular = login.celular,
             Tipo = TipoUsuario.Comum,
+            NormalizedUserName = login.userName,
+            PasswordHash = login.senha,
+            DataDeNascimento = login.nascimento
         };
 
         _IInsereNaFila.Inserir(user, "InsertApplicationUser");

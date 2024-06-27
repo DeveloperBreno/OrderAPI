@@ -12,9 +12,9 @@ public class AplicacaoUsuario : IAplicacaoUsuario
         _IUsuario = IUsuario;
     }
 
-    public async Task<bool> AdicionarUsuario(string email, string senha, DateTime nascimento, string celular)
+    public async Task<bool> AdicionarUsuario(string email, string senha, DateTime nascimento, string celular, string userName)
     {
-        return await _IUsuario.AdicionarUsuario(email, senha, nascimento, celular);
+        return await _IUsuario.AdicionarUsuario(email, senha, nascimento, celular, userName);
     }
 
     public async Task<bool> ExisteUsuario(string email, string senha)
