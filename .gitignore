@@ -1,3 +1,18 @@
+# front-end
+/front-end/node_modules/*
+/front-end/.pnp
+/front-end/.pnp.js
+/front-end/coverage
+/front-end/build/*
+/front-end/.DS_Store
+/front-end/.env.local
+/front-end/.env.development.local
+/front-end/.env.test.local
+/front-end/.env.production.local
+/front-end/npm-debug.log*
+/front-end/yarn-debug.log*
+/front-end/yarn-error.log*
+
 # back-end
 /back-end/Aplicacao/bin/*
 /back-end/Aplicacao/obj/*
@@ -14,21 +29,6 @@
 /back-end/.vs/*
 /back-end/Enditades/obj/*
 /back-end/Dominio/obj/*
-
-# front-end
-/front-end/node_modules/*
-/front-end/.pnp
-/front-end/.pnp.js
-/front-end/coverage
-/front-end/build/*
-/front-end/.DS_Store
-/front-end/.env.local
-/front-end/.env.development.local
-/front-end/.env.test.local
-/front-end/.env.production.local
-/front-end/npm-debug.log*
-/front-end/yarn-debug.log*
-/front-end/yarn-error.log*
 /back-end/Dominio/obj
 /back-end/Aplicacao/obj
 /back-end/Teste/Testes/bin/Debug/net8.0
