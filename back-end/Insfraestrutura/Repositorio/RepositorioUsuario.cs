@@ -53,6 +53,24 @@ public class RepositorioUsuario : RepositorioGenerico<ApplicationUser>, IUsuario
             .AnyAsync();
     }
 
+    public async Task<bool> RemoverUsuarioPorId(string id)
+    {
+        try
+        {
+            var user = await _context.ApplicationUser.Where(o => o.Id.Equals(id))
+            .FirstOrDefaultAsync();
+
+            _context.ApplicationUser.Remove(user);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
+
+    }
+
     public async Task<string> RetornaIdUsuario(string email)
     {
         var user = await _context.ApplicationUser.Where(o => o.Email.Equals(email))

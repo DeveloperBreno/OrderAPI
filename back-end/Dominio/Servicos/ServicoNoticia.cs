@@ -51,4 +51,9 @@ public class ServicoNoticia : IServicoNoticia
     {
         return await _INoticia.ListarNoticias(n => n.Ativo);
     }
+
+    public async Task<bool> ExcluirNoticiasPorUsuarioId(string id)
+    {
+        return await _INoticia.ExcluirNoticiasPorUsuarioId(id);
+    }
 }

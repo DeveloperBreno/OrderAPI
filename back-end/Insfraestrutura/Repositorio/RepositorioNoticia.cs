@@ -16,6 +16,20 @@ public class RepositorioNoticia : RepositorioGenerico<Noticia>, INoticia
         _context = new Contexto(new DbContextOptionsBuilder<Contexto>().Options);
     }
 
+    public async Task<bool> ExcluirNoticiasPorUsuarioId(string id)
+    {
+        var noticias = await _context.Noticia.Where(o => o.UsuarioId == id).ToListAsync();
+
+        foreach (var noticia in noticias)
+        {
+            _context.Noticia.Remove(noticia);
+        }
+
+        await _context.SaveChangesAsync();
+
+        return true;
+    }
+
     public async Task<List<Noticia>> ListarNoticias(Expression<Func<Noticia, bool>> exNoticia)
     {
         return await _context.Noticia.Where(exNoticia).ToListAsync();

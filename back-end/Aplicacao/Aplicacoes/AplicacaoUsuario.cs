@@ -22,6 +22,11 @@ public class AplicacaoUsuario : IAplicacaoUsuario
         return await _IUsuario.ExisteUsuario(email, senha);
     }
 
+    public async Task<bool> RemoverUsuarioPorId(string id)
+    {
+        return await _IUsuario.RemoverUsuarioPorId(id);
+    }
+
     public async Task<string> RetornaIdUsuario(string email)
     {
         return await _IUsuario.RetornaIdUsuario(email);
