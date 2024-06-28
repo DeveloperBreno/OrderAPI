@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,8 +10,8 @@ using Aplicacao.Interfaces;
 using Insfraestrutura.Configuracoes;
 using Dominio.Interfaces;
 using Insfraestrutura.Repositorio;
-using System.Threading.Tasks;
 using Aplicacao.Aplicacoes;
+using Microsoft.Extensions.Configuration;
 
 class Program
 {
@@ -24,42 +23,48 @@ class Program
         {
             var services = serviceScope.ServiceProvider;
             var aplicacaoUsuario = services.GetRequiredService<IAplicacaoUsuario>();
+            var configuration = services.GetRequiredService<IConfiguration>();
 
-            await StartConsumerAsync(aplicacaoUsuario);
+            await StartConsumerAsync(aplicacaoUsuario, configuration);
         }
 
-        Console.WriteLine(" Pressione [enter] para sair.");
+        Console.WriteLine("Pressione [enter] para sair.");
         Console.ReadLine();
     }
 
     static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder(args)
+            .ConfigureAppConfiguration((context, builder) =>
+            {
+                builder.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            })
             .ConfigureServices((hostContext, services) =>
             {
-                var connectionString = "Host=localhost;Port=5432;Database=MyDatabase;Username=postgres;Password=SuaSenha"; // Substitua pela sua string de conexão
+                var configuration = hostContext.Configuration;
+                var connectionString = configuration.GetConnectionString("DefaultConnection");
 
                 services.AddDbContext<Contexto>(options =>
                     options.UseNpgsql(connectionString));
 
                 services.AddScoped<IAplicacaoUsuario, AplicacaoUsuario>();
-                services.AddScoped<IUsuario, RepositorioUsuario>(); // Certifique-se de registrar o repositório também
-
-                // Outros serviços necessários
+                services.AddScoped<IUsuario, RepositorioUsuario>();
             });
 
-    static async Task StartConsumerAsync(IAplicacaoUsuario aplicacaoUsuario)
+    static async Task StartConsumerAsync(IAplicacaoUsuario aplicacaoUsuario, IConfiguration configuration)
     {
+        var rabbitMQConfig = configuration.GetSection("RabbitMQ").Get<RabbitMQConfig>();
+
         var factory = new ConnectionFactory()
         {
-            HostName = "localhost",
-            UserName = "guest",
-            Password = "guest"
+            HostName = rabbitMQConfig.HostName,
+            UserName = rabbitMQConfig.UserName,
+            Password = rabbitMQConfig.Password
         };
 
         using (var connection = factory.CreateConnection())
         using (var channel = connection.CreateModel())
         {
-            var queueName = "InsertApplicationUser";
+            var queueName = rabbitMQConfig.QueueName;
             channel.QueueDeclare(queue: queueName,
                                  durable: true,
                                  exclusive: false,
@@ -108,4 +113,12 @@ class Program
                              body: body);
         Console.WriteLine(" [x] Mensagem republicada: {0}", message);
     }
+}
+
+public class RabbitMQConfig
+{
+    public string HostName { get; set; }
+    public string UserName { get; set; }
+    public string Password { get; set; }
+    public string QueueName { get; set; }
 }
