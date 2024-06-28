@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "O4HdZ1ARvTdKm0I1DQcUbfo2zYL8DE5rB/sJLTP462AMhipyYQxJ3X+MxEopQZzCyOw3rmPHgatxj5mUZS7isQ==",
+  "dgSpecHash": "HB/yA+OTEI8=",
   "success": true,
-  "projectFilePath": "C:\\DEV\\cursoReact\\OrderAPI\\back-end\\Enditades\\Entidades.csproj",
+  "projectFilePath": "C:\\dev\\OrderAPI\\OrderAPI\\back-end\\Enditades\\Entidades.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\45781005889\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\45781005889\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

@@ -54,6 +54,8 @@ builder.Services.AddScoped<IServicoNoticia, ServicoNoticia>();
 builder.Services.AddScoped<IAplicacaoNoticia, AplicacaoNoticia>();
 builder.Services.AddScoped<IAplicacaoUsuario, AplicacaoUsuario>();
 
+builder.Services.AddSignalR();
+
 // Configurar RabbitMQ
 builder.Services.AddSingleton<IConnection>(sp =>
 {
@@ -106,6 +108,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -116,6 +120,7 @@ app.UseSwaggerUI();
 //}
 
 app.UseHttpsRedirection();
+app.MapHub<ChatHub>("/chathub"); // Replace ChatHub with your Hub class
 
 app.UseCors("AllowAll");
 
@@ -125,5 +130,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+
+
 
 app.Run();

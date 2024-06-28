@@ -5,20 +5,14 @@ import Login from './components/partials/Login';
 import Register from './components/partials/Register';
 import Lojas from './components/partials/Lojas';
 import TemporaryMessage from './components/alerts/TemporaryMessage';
+import * as signalR from '@microsoft/signalr';
 
 function App() {
-
+  const [connection, setConnection] = useState(null);
+  const [messages, setMessages] = useState([]);
   const [showMessage, setShowMessage] = useState(false);
   const [messageText, setMessageText] = useState('');
-
   const [pathParam, setPathParam] = useState('');
-
-  useEffect(() => {
-    const path = window.location.pathname;
-    const param = path.substring(path.lastIndexOf('/') + 1);
-    setPathParam(param);
-  }, []);
-
   const [lojas] = useState([
     {
       id: 1,
@@ -43,9 +37,9 @@ function App() {
       endereco: 'Av. xyz, 501',
       disponivelAgora: false,
       image: 'https://via.placeholder.com/300x300',
-    },
-  ]);
+    }
 
+  ]); // Defina suas lojas aqui
   const [products, setProducts] = useState([
     {
       id: 1,
@@ -74,15 +68,52 @@ function App() {
       quantity: 0,
       image: 'https://via.placeholder.com/300x300',
       stock: 6
-    },
-  ]);
+    }
+
+  ]); // Defina seus produtos aqui
+  const [cartItems, setCartItems] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const serverUrl = 'http://localhost:5081'; // Substitua pelo endereço do seu servidor SignalR
+
+    const newConnection = new signalR.HubConnectionBuilder()
+      .withUrl(`${serverUrl}/chatHub`)
+      .build();
+
+    setConnection(newConnection);
+  }, []);
+
+  useEffect(() => {
+    if (connection) {
+      connection.on('ReceiveMessage', (message) => {
+        setMessages(prevMessages => [...prevMessages, message]);
+      });
+
+      connection.start()
+        .then(() => console.log('Conectado ao servidor SignalR'))
+        .catch((error) => console.error(`Erro ao conectar ao servidor SignalR: ${error}`));
+
+      return () => {
+        connection.stop()
+          .then(() => console.log('Conexão SignalR encerrada'))
+          .catch((error) => console.error(`Erro ao encerrar conexão SignalR: ${error}`));
+      };
+    }
+  }, [connection]);
+
+  const sendMessage = async () => {
+    try {
+      await connection.invoke('SendMessage', 'ReactNativeClient', 'Olá do cliente React Native!');
+    } catch (error) {
+      console.error(`Erro ao enviar mensagem para o servidor SignalR: ${error}`);
+    }
+  };
 
   const notificar = (message) => {
     setMessageText(message);
     setShowMessage(true);
-    setTimeout(() => {
-      setShowMessage(false);
-    }, 5000);
+    setTimeout(() => setShowMessage(false), 5000);
   };
 
   const onSelectLoja = (loja) => {
@@ -94,72 +125,43 @@ function App() {
     }
   };
 
-  const [cartItems, setCartItems] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
   const handleAddToCart = (product) => {
-    const existe = cartItems.filter(o => o.id === product.id);
-    if (existe.length > 0) {
-      product.quantity = existe[0].quantity + 1;
+    const existe = cartItems.find(o => o.id === product.id);
 
-      const newItems = cartItems.filter(o => o.id !== product.id);
-      setCartItems([...newItems, product]);
-
+    if (existe) {
+      product.quantity = existe.quantity + 1;
+      setCartItems(cartItems.map(item => (item.id === product.id ? product : item)));
     } else {
       product.quantity = 1;
       setCartItems([...cartItems, product]);
     }
-
   };
 
   const handleRemoveFromCart = (productId) => {
-    setCartItems(cartItems.filter((item) => item.id !== productId));
-
-    const produto = products.filter(o => o.id === productId)[0];
-    produto.quantity = 0;
-
-    const novaListaDeProduto = products.filter(o => o.id !== productId);
-
-    setProducts([...novaListaDeProduto, produto]);
+    setCartItems(cartItems.filter(item => item.id !== productId));
+    setProducts(products.map(product => {
+      if (product.id === productId) product.quantity = 0;
+      return product;
+    }));
   };
 
-  const handleLogin = async (cpf, password) => {
-    // Implemente a lógica de autenticação aqui
-
+  const handleLogin = async (email, password) => {
     try {
-
-
-
-      let headersList = {
-        "User-Agent": "Thunder Client (http://localhost:3000)",
-        "accept": "*/*",
-        "Content-Type": "application/json"
-      }
-
-      let bodyContent = JSON.stringify({
-        "email": "developerbreno@gmail.com",
-        "senha": "DEVBRE>no.257.DEVBRE",
-        "celular": "string",
-        "nascimento": "2024-06-13T00:33:09.644Z"
-      });
-
-      let response = await fetch("http://localhost:5000/User/Token", {
+      const response = await fetch("http://localhost:5081/v1/User/Token", {
         method: "POST",
-        body: bodyContent,
-        headers: headersList,
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email, password })
       });
 
-      let data = await response.text();
+      const data = await response.json();
       console.log(data);
 
-
       setIsLoggedIn(true);
-
     } catch (error) {
       console.error('Erro:', error);
     }
-
-
   };
 
   const handleRegister = (address, number, cep, complement) => {
@@ -170,56 +172,51 @@ function App() {
     <div>
       {showMessage && <TemporaryMessage message={messageText} />}
 
-      <>
-        <div className='container'>
-          <div className='row'>
+      <div style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <p>Messages:</p>
+        {messages.map((msg, index) => (
+          <p key={index}>{msg}</p>
+        ))}
+        <button onClick={sendMessage}>Enviar Mensagem</button>
+      </div>
 
-
-
-            <div className='col-md-2'>
-
-              {pathParam === '' ? (
-                <div className='col-md-1'>
-
-                </div>
-              ) : (
-                <div>
-                  <p
-                    href="#"
-                    onClick={() => setPathParam('')}
-                    className="mt-5 text-primary"
-                    style={{ textDecoration: 'underline', cursor: 'pointer' }}
-                  >
-                    Lojas
-                  </p>
-                </div>
-              )}
-
-
-            </div>
-
-            <div className='col-md-8'>
-
-            </div>
-            {isLoggedIn ? (
-              <div className='col-md-1'>
-                Olá, usuario
-              </div>
+      <div className='container'>
+        <div className='row'>
+          <div className='col-md-2'>
+            {pathParam === '' ? (
+              <div className='col-md-1'></div>
             ) : (
-              <>
-                <div className='col-md-1' style={{ textAlign: 'right' }}>
-                  <Register onRegister={handleRegister} />
-                </div>
-                <div className='col-md-1' style={{ textAlign: 'right' }}>
-                  <Login onLogin={handleLogin} />
-                </div>
-
-              </>
+              <div>
+                <p
+                  href="#"
+                  onClick={() => setPathParam('')}
+                  className="mt-5 text-primary"
+                  style={{ textDecoration: 'underline', cursor: 'pointer' }}
+                >
+                  Lojas
+                </p>
+              </div>
             )}
           </div>
-        </div>
-      </>
 
+          <div className='col-md-8'></div>
+
+          {isLoggedIn ? (
+            <div className='col-md-1'>
+              Olá, usuário
+            </div>
+          ) : (
+            <>
+              <div className='col-md-1' style={{ textAlign: 'right' }}>
+                <Register onRegister={handleRegister} />
+              </div>
+              <div className='col-md-1' style={{ textAlign: 'right' }}>
+                <Login onLogin={handleLogin} />
+              </div>
+            </>
+          )}
+        </div>
+      </div>
 
       {pathParam.length > 0 ? (
         <>
@@ -227,11 +224,8 @@ function App() {
           <ProductList products={products} onAddToCart={handleAddToCart} />
         </>
       ) : (
-        <>
-          <Lojas lojas={lojas} onSelectLoja={onSelectLoja} />
-        </>
+        <Lojas lojas={lojas} onSelectLoja={onSelectLoja} />
       )}
-
     </div>
   );
 }

@@ -12,7 +12,6 @@ docker run -d --name redis-container -p 6379:6379 redis
 
 acesse: redis://localhost:6379
 
-
 ## serviço rabbitqm
 docker pull rabbitmq:3.11-management
 docker run -d --hostname rabbitmq --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.11-management
@@ -32,7 +31,3 @@ iniciar:
 docker run -p 5000:5000 api
 
 depois acesse: http://localhost:5000/swagger/index.html
-
-
-
-

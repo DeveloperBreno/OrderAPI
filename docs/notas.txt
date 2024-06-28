@@ -1,2 +1,0 @@
-vps com docker
-https://www.youtube.com/watch?v=MiAiFTQjitc

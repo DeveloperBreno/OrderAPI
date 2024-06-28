@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Insfraestrutura
-build_property.ProjectDir = C:\DEV\cursoReact\OrderAPI\back-end\Insfraestrutura\
+build_property.ProjectDir = C:\dev\OrderAPI\OrderAPI\back-end\Insfraestrutura\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
