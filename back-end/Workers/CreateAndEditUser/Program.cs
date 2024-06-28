@@ -71,6 +71,9 @@ class Program
                                  autoDelete: false,
                                  arguments: null);
 
+            // Define a quantidade de mensagens que cada worker pode processar por vez
+            channel.BasicQos(prefetchSize: 0, prefetchCount: 1, global: false);
+
             Console.WriteLine(" [*] Aguardando mensagens na fila {0}.", queueName);
 
             var consumer = new EventingBasicConsumer(channel);
@@ -79,14 +82,16 @@ class Program
                 var body = ea.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
 
-                channel.BasicAck(ea.DeliveryTag, false);
                 try
                 {
                     var applicationUser = JsonConvert.DeserializeObject<ApplicationUser>(message);
                     await ProcessarItemAsync(applicationUser, aplicacaoUsuario);
+                    // Confirma que a mensagem foi processada
+                    channel.BasicAck(ea.DeliveryTag, false);
                 }
                 catch (Exception ex)
                 {
+                    // Republica a mensagem em caso de falha
                     RepublisarMensagem(channel, queueName, message);
                 }
             };
