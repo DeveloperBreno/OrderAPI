@@ -6,4 +6,4 @@ build:
 docker build -t react .
 
 start docker:
-docker run -p 3000:3000 react
+docker run -p 80:80 react
