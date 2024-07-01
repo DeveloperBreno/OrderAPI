@@ -46,7 +46,6 @@ public class ServicoNoticia : IServicoNoticia
         }
     }
 
-
     public async Task<List<Noticia>> ListarNoticiasAtivas()
     {
         return await _INoticia.ListarNoticias(n => n.Ativo);

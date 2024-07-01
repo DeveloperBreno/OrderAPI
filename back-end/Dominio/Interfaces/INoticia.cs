@@ -8,7 +8,4 @@ public interface INoticia : IGenericos<Noticia>
 {
     Task<bool> ExcluirNoticiasPorUsuarioId(string id);
     Task<List<Noticia>> ListarNoticias(Expression<Func<Noticia, bool>> exNoticia);
-
-
-
 }

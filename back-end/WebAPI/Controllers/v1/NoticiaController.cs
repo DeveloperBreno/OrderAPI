@@ -2,9 +2,9 @@
 using Entidades.Entidades;
 using Entidades.Notificacoes;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Models;
+using WebAPI.Token;
 
 namespace WebAPI.Controllers.v1;
 
@@ -42,7 +42,7 @@ public class NoticiaController : ControllerBase
             Informacao = noticiaModel.Informacao
         };
 
-        var email = User.Claims.FirstOrDefault().Subject.Name;
+        var email = JwtSecurityKey.GetEmailFromUserSession(User);
         var idUsuario = await _IAplicacaoUsuario.RetornaIdUsuario(email);
         novaNoticia.UsuarioId = idUsuario;
 
@@ -61,7 +61,7 @@ public class NoticiaController : ControllerBase
         novaNoticia.Titulo = noticiaModel.Titulo;
         novaNoticia.Informacao = noticiaModel.Informacao;
 
-        var email = User.Claims.FirstOrDefault().Subject.Name;
+        var email = JwtSecurityKey.GetEmailFromUserSession(User);
         var idUsuario = await _IAplicacaoUsuario.RetornaIdUsuario(email);
 
         novaNoticia.UsuarioId = idUsuario;

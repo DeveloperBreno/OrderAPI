@@ -19,16 +19,15 @@ namespace WebAPI.Controllers.v1;
 [Route("[controller]")]
 public class UsuarioController : ControllerBase
 {
-    // pode ser utilizado para novas funcionalidades, como inativar usuario e etc.
-    private readonly ILogger<WeatherForecastController> _logger;
     private readonly IAplicacaoUsuario _IAplicacaoUsuario;
     private readonly IInsereNaFila _IInsereNaFila;
 
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
+    private readonly ILogger _logger;
 
     public UsuarioController(IAplicacaoUsuario IAplicacaoUsuario, SignInManager<ApplicationUser> signInManager,
-        UserManager<ApplicationUser> userManager, ILogger<WeatherForecastController> logger, IInsereNaFila insereNaFila)
+        UserManager<ApplicationUser> userManager, ILogger logger, IInsereNaFila insereNaFila)
     {
         _IAplicacaoUsuario = IAplicacaoUsuario;
         _userManager = userManager;

@@ -63,7 +63,6 @@ namespace Insfraestrutura.Repositorio.Genericos
                 }
 
                 // Liberar quaisquer recursos não gerenciados aqui
-
                 disposed = true;
             }
         }

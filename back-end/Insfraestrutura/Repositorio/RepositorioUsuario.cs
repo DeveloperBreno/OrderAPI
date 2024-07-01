@@ -36,15 +36,12 @@ public class RepositorioUsuario : RepositorioGenerico<ApplicationUser>, IUsuario
         }
         catch (DbUpdateException ex)
         {
-
             // Lidar com outras falhas de forma apropriada
-            throw ex;
+            throw;
         }
 
         return true;
-
     }
-
 
     public async Task<bool> ExisteUsuario(string email, string senha)
     {
@@ -73,12 +70,11 @@ public class RepositorioUsuario : RepositorioGenerico<ApplicationUser>, IUsuario
 
     public async Task<string> RetornaIdUsuario(string email)
     {
-        var user = await _context.ApplicationUser.Where(o => o.Email.Equals(email))
-            .AsNoTracking()
-            .FirstOrDefaultAsync();
+        var user = await _context.ApplicationUser
+        .FromSqlInterpolated($"SELECT \"Id\" FROM \"ApplicationUser\" WHERE \"Email\" = {email}")
+        .FirstOrDefaultAsync();
 
         return user.Id;
-
     }
 
     public async Task<string> RetornaONomeDoUsuarioPorId(string idUsuario)

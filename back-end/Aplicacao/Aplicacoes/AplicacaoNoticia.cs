@@ -30,9 +30,6 @@ public class AplicacaoNoticia : IAplicacaoNoticia
     {
         return await _IServicoNoticia.ListarNoticiasAtivas();
     }
-
-
-
     public async Task Adicionar(Noticia obj)
     {
         await _INoticia.Adicionar(obj);
