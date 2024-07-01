@@ -86,14 +86,17 @@ class Program
                 {
                     var applicationUser = JsonConvert.DeserializeObject<ApplicationUser>(message);
                     await ProcessarItemAsync(applicationUser, aplicacaoUsuario);
-                    // Confirma que a mensagem foi processada
-                    channel.BasicAck(ea.DeliveryTag, false);
+                    
                 }
                 catch (Exception ex)
                 {
                     // Republica a mensagem em caso de falha
                     RepublisarMensagem(channel, queueName, message);
                 }
+
+                // Confirma que a mensagem foi processada
+                channel.BasicAck(ea.DeliveryTag, false);
+
             };
 
             channel.BasicConsume(queue: queueName,
@@ -111,11 +114,20 @@ class Program
 
     static void RepublisarMensagem(IModel channel, string queueName, string message)
     {
+        queueName = $"FilaDeErro{queueName}";
         var body = Encoding.UTF8.GetBytes(message);
+
+        channel.QueueDeclare(queue: queueName,
+                     durable: true,
+                     exclusive: false,
+                     autoDelete: false,
+                     arguments: null);
+
         channel.BasicPublish(exchange: "",
                              routingKey: queueName,
                              basicProperties: null,
                              body: body);
+
         Console.WriteLine(" [x] Mensagem republicada: {0}", message);
     }
 }
