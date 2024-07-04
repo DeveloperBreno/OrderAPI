@@ -120,7 +120,7 @@ app.UseSwagger();
 app.UseSwaggerUI();
 //}
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.MapHub<ChatHub>("/chathub"); // Replace ChatHub with your Hub class
 
 app.UseCors("AllowAll");
