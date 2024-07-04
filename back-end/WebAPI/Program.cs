@@ -124,7 +124,7 @@ app.MapHub<ChatHub>("/chathub"); // Replace ChatHub with your Hub class
 
 app.UseCors("AllowAll");
 
-app.UseRequestTimeout(TimeSpan.FromSeconds(30)); // Adicione o middleware de tempo limite aqui
+//app.UseRequestTimeout(TimeSpan.FromSeconds(30)); // Adicione o middleware de tempo limite aqui
 
 app.UseAuthentication();
 app.UseAuthorization();
