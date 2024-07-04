@@ -72,7 +72,7 @@ try
             Password = "guest"
         };
 
-        factory.Port = 4369;
+        factory.Port = 5672;
 
         return factory.CreateConnection();
     });
