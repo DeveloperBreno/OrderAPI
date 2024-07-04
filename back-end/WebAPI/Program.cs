@@ -67,10 +67,13 @@ try
     {
         var factory = new ConnectionFactory
         {
-            HostName = "127.0.0.1:4369",
+            HostName = "127.0.0.1",
             UserName = "guest",
-            Password = "guest",
+            Password = "guest"
         };
+
+        factory.Port = 5672;
+
         return factory.CreateConnection();
     });
 
