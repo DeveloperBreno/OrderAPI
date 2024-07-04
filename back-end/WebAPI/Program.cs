@@ -65,9 +65,9 @@ builder.Services.AddSingleton<IConnection>(sp =>
 {
     var factory = new ConnectionFactory
     {
-        HostName = "localhost", 
+        HostName = "192.168.1.100:5672", 
         UserName = "guest",
-        Password = "guest" 
+        Password = "guest" ,
     };
     return factory.CreateConnection();
 });
