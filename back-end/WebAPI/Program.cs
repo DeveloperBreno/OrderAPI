@@ -61,28 +61,26 @@ builder.Services.AddSingleton(typeof(ILogger), typeof(Logger<UsuarioController>)
 builder.Services.AddSignalR();
 
 // Configurar RabbitMQ
-builder.Services.AddSingleton<IConnection>(sp =>
+try
 {
-    var factory = new ConnectionFactory
+    builder.Services.AddSingleton<IConnection>(sp =>
     {
-        HostName = "localhost:5672", 
-        UserName = "guest",
-        Password = "guest" ,
-    };
-
-    try
-    {
+        var factory = new ConnectionFactory
+        {
+            HostName = "localhost",
+            UserName = "guest",
+            Password = "guest",
+        };
         return factory.CreateConnection();
-    }
-    catch (Exception e)
-    {
-        Console.WriteLine("Message: " + e.Message);
-        Console.WriteLine("InnerException: " + e.InnerException);
-        Console.WriteLine("StackTrace: " + e.StackTrace);
-    }
+    });
 
-    return factory.CreateConnection();
-});
+}
+catch (Exception e)
+{
+    Console.WriteLine("Message: " + e.Message);
+    Console.WriteLine("InnerException: " + e.InnerException);
+    Console.WriteLine("StackTrace: " + e.StackTrace);
+}
 
 builder.Services.AddScoped<IInsereNaFila, InserirNaFila>();
 
