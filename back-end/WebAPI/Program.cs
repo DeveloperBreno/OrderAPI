@@ -69,6 +69,18 @@ builder.Services.AddSingleton<IConnection>(sp =>
         UserName = "guest",
         Password = "guest" ,
     };
+
+    try
+    {
+        return factory.CreateConnection();
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine("Message: " + e.Message);
+        Console.WriteLine("InnerException: " + e.InnerException);
+        Console.WriteLine("StackTrace: " + e.StackTrace);
+    }
+
     return factory.CreateConnection();
 });
 
