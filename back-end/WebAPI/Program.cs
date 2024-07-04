@@ -16,6 +16,7 @@ using WebAPI.Token;
 using Dominio.Interfaces.Filas;
 using Insfraestrutura.Filas;
 using RabbitMQ.Client;
+using WebAPI.Controllers.v1;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,6 +54,9 @@ builder.Services.AddScoped<IServicoNoticia, ServicoNoticia>();
 // Interface aplicação
 builder.Services.AddScoped<IAplicacaoNoticia, AplicacaoNoticia>();
 builder.Services.AddScoped<IAplicacaoUsuario, AplicacaoUsuario>();
+
+// logs
+builder.Services.AddSingleton(typeof(ILogger), typeof(Logger<UsuarioController>));
 
 builder.Services.AddSignalR();
 
