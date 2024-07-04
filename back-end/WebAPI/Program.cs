@@ -67,7 +67,7 @@ try
     {
         var factory = new ConnectionFactory
         {
-            HostName = "localhost",
+            HostName = "127.0.0.1:4369",
             UserName = "guest",
             Password = "guest",
         };
