@@ -2,7 +2,7 @@
 ## MongoDB
 docker pull mongo
 
-docker run -d --name mongodb-container -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=sua_senha_segura mongo
+docker run -d --name mongodb-container -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=DcpmQP3pFjNFrRJFNDwTRNwdAIKlvlHMCNrsC67Ijzc mongo
 
 Para logar em algum gerenciador de banco não relacional, recomendo usar o NoSQLBooster:
 
