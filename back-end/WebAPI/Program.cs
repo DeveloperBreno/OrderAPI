@@ -17,9 +17,13 @@ using Dominio.Interfaces.Filas;
 using Insfraestrutura.Filas;
 using RabbitMQ.Client;
 using WebAPI.Controllers.v1;
-using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =>
+{
+    options.SerializerOptions.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
+});
 
 // Adiciona a política CORS
 builder.Services.AddCors(options =>
@@ -128,11 +132,11 @@ app.UseSwaggerUI();
 //}
 
 //app.UseHttpsRedirection();
-app.MapHub<ChatHub>("/chathub"); // Replace ChatHub with your Hub class
+app.MapHub<ChatHub>("/chathub"); 
 
 app.UseCors("AllowAll");
 
-//app.UseRequestTimeout(TimeSpan.FromSeconds(30)); // Adicione o middleware de tempo limite aqui
+app.UseRequestTimeout(TimeSpan.FromSeconds(30));
 
 app.UseAuthentication();
 app.UseAuthorization();
