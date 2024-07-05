@@ -1,11 +1,12 @@
 # Toda a documentação e domínio do negócio serão escritos aqui
-## MongoDB
-docker pull mongo
-
-docker run -d --name mongodb-container -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=DcpmQP3pFjNFrRJFNDwTRNwdAIKlvlHMCNrsC67Ijzc mongo
-
+## Couchbase
+docker run -d --name couchbase \
+  -p 8091-8094:8091-8094 \
+  -p 11210:11210 \
+  -e COUCHBASE_ADMINISTRATOR_PASSWORD=DcpmQP3pFjNFrRJFNDwTRNwdAIKlvlHMCNrsC67Ijzc \
+  couchbase
+  
 Para logar em algum gerenciador de banco não relacional, recomendo usar o NoSQLBooster:
-
 mongodb://admin:sua_senha_segura@localhost:27017
 
 ## PostgreSQL
