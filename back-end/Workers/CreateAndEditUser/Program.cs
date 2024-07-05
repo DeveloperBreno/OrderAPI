@@ -57,54 +57,53 @@ class Program
         var factory = new ConnectionFactory()
         {
             HostName = rabbitMQConfig.HostName,
+            Port = rabbitMQConfig.Port,
             UserName = rabbitMQConfig.UserName,
             Password = rabbitMQConfig.Password
         };
 
-        using (var connection = factory.CreateConnection())
-        using (var channel = connection.CreateModel())
+        using var connection = factory.CreateConnection();
+        using var channel = connection.CreateModel();
+        var queueName = rabbitMQConfig.QueueName;
+        channel.QueueDeclare(
+            queue: queueName,
+            durable: true,
+            exclusive: false,
+            autoDelete: false);
+
+        // Define a quantidade de mensagens que cada worker pode processar por vez
+        channel.BasicQos(prefetchSize: 0, prefetchCount: 1, global: false);
+
+        Console.WriteLine(" [*] Aguardando mensagens na fila {0}.", queueName);
+
+        var consumer = new EventingBasicConsumer(channel);
+        consumer.Received += async (model, ea) =>
         {
-            var queueName = rabbitMQConfig.QueueName;
-            channel.QueueDeclare(queue: queueName,
-                                 durable: true,
-                                 exclusive: false,
-                                 autoDelete: false,
-                                 arguments: null);
+            var body = ea.Body.ToArray();
+            var message = Encoding.UTF8.GetString(body);
 
-            // Define a quantidade de mensagens que cada worker pode processar por vez
-            channel.BasicQos(prefetchSize: 0, prefetchCount: 1, global: false);
-
-            Console.WriteLine(" [*] Aguardando mensagens na fila {0}.", queueName);
-
-            var consumer = new EventingBasicConsumer(channel);
-            consumer.Received += async (model, ea) =>
+            try
             {
-                var body = ea.Body.ToArray();
-                var message = Encoding.UTF8.GetString(body);
+                var applicationUser = JsonConvert.DeserializeObject<ApplicationUser>(message);
+                await ProcessarItemAsync(applicationUser, aplicacaoUsuario);
 
-                try
-                {
-                    var applicationUser = JsonConvert.DeserializeObject<ApplicationUser>(message);
-                    await ProcessarItemAsync(applicationUser, aplicacaoUsuario);
-                    
-                }
-                catch (Exception ex)
-                {
-                    // Republica a mensagem em caso de falha
-                    RepublisarMensagem(channel, queueName, message);
-                }
+            }
+            catch (Exception ex)
+            {
+                // Republica a mensagem em caso de falha
+                RepublisarMensagem(channel, queueName, message);
+            }
 
-                // Confirma que a mensagem foi processada
-                channel.BasicAck(ea.DeliveryTag, false);
+            // Confirma que a mensagem foi processada
+            channel.BasicAck(ea.DeliveryTag, false);
 
-            };
+        };
 
-            channel.BasicConsume(queue: queueName,
-                                 autoAck: false,
-                                 consumer: consumer);
+        channel.BasicConsume(queue: queueName,
+                             autoAck: false,
+                             consumer: consumer);
 
-            await Task.Delay(Timeout.Infinite); // Mantém o programa em execução para continuar consumindo mensagens
-        }
+        await Task.Delay(Timeout.Infinite); // Mantém o programa em execução para continuar consumindo mensagens
     }
 
     static async Task ProcessarItemAsync(ApplicationUser applicationUser, IAplicacaoUsuario aplicacaoUsuario)
@@ -135,6 +134,7 @@ class Program
 public class RabbitMQConfig
 {
     public string HostName { get; set; }
+    public int Port { get; set; }
     public string UserName { get; set; }
     public string Password { get; set; }
     public string QueueName { get; set; }
