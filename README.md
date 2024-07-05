@@ -24,7 +24,7 @@ Acesse: redis://localhost:6379
 ## RabbitMQ Services
 docker pull rabbitmq:3.11-management
 
-docker run -d --hostname rabbitmq --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.11-management
+docker run -d --hostname rabbitmq --name rabbitmq -p 5672:5672 -p 15672:15672 -e RABBITMQ_DEFAULT_PASS="DcpmQP3pFjNFrRJFNDwTRNwdAIKlvlHMCNrsC67Ijzc" rabbitmq:3.11-management
 
 http://localhost:15672
 
