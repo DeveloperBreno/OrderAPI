@@ -17,6 +17,7 @@ using Dominio.Interfaces.Filas;
 using Insfraestrutura.Filas;
 using RabbitMQ.Client;
 using WebAPI.Controllers.v1;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -61,28 +62,18 @@ builder.Services.AddSingleton(typeof(ILogger), typeof(Logger<UsuarioController>)
 builder.Services.AddSignalR();
 
 // Configurar RabbitMQ
-try
+builder.Services.AddSingleton<IConnection>(sp =>
 {
-    builder.Services.AddSingleton<IConnection>(sp =>
+    var rabbitMQSettings = builder.Configuration.GetSection("RabbitMQ").Get<RabbitMQSettings>();
+    var factory = new ConnectionFactory
     {
-        var factory = new ConnectionFactory
-        {
-            HostName = "200.6.48.21",
-            Port = 5672,
-            UserName = "guest",
-            Password = "guest"
-        };
-
-        return factory.CreateConnection();
-    });
-
-}
-catch (Exception e)
-{
-    Console.WriteLine("Message: " + e.Message);
-    Console.WriteLine("InnerException: " + e.InnerException);
-    Console.WriteLine("StackTrace: " + e.StackTrace);
-}
+        HostName = rabbitMQSettings.HostName,
+        Port = rabbitMQSettings.Port,
+        UserName = rabbitMQSettings.UserName,
+        Password = rabbitMQSettings.Password
+    };
+    return factory.CreateConnection();
+});
 
 builder.Services.AddScoped<IInsereNaFila, InserirNaFila>();
 
@@ -149,3 +140,12 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
+public class RabbitMQSettings
+{
+    public string HostName { get; set; }
+    public int Port { get; set; }
+    public string UserName { get; set; }
+    public string Password { get; set; }
+}

@@ -24,8 +24,8 @@
             }
             else
             {
-                //cts.Cancel(); // Cancel the timeout task if the request completed in time
-                //await requestTask; // Complete the request
+                cts.Cancel(); // Cancel the timeout task if the request completed in time
+                await requestTask; // Complete the request
             }
         }
     }
