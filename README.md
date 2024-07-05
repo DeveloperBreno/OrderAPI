@@ -10,7 +10,7 @@ mongodb://admin:sua_senha_segura@localhost:27017
 
 ## PostgreSQL
 ### 1. Pull e Run do contêiner do PostgreSQL
-docker run -e "POSTGRES_DB=MyDatabase" -e "POSTGRES_PASSWORD=SuaSenha" -p 5432:5432 --name postgres -d postgres:latest
+docker run -e "POSTGRES_DB=MyDatabase" -e "POSTGRES_PASSWORD=DcpmQP3pFjNFrRJFNDwTRNwdAIKlvlHMCNrsC67Ijzc" -p 5432:5432 --name postgres -d postgres:latest
 
 ### baixe o pg admin para gerenciar o banco de dados postgres sql
 
@@ -24,7 +24,7 @@ Acesse: redis://localhost:6379
 ## RabbitMQ Services
 docker pull rabbitmq:3.11-management
 
-docker run -d --hostname rabbitmq --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.11-management
+docker run -d --hostname rabbitmq --name rabbitmq -p 5672:5672 -p 15672:15672 -e RABBITMQ_DEFAULT_PASS="DcpmQP3pFjNFrRJFNDwTRNwdAIKlvlHMCNrsC67Ijzc" rabbitmq:3.11-management
 
 http://localhost:15672
 
