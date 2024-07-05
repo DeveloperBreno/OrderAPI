@@ -67,7 +67,7 @@ try
     {
         var factory = new ConnectionFactory
         {
-            HostName = "rabbitmq",
+            HostName = "200.6.48.21",
             Port = 5672,
             UserName = "guest",
             Password = "guest"
