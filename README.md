@@ -45,6 +45,9 @@ docker run -p 443:443 api
 
 Depois acesse: http://localhost:5000/swagger/index.html
 
+### Atualização rapida:
+git pull && dotnet publish -c Release -o ./out --runtime linux-x64 && docker build -t api . && docker run -p 443:443 api
+
 ## Front-end
 Antes de buildar a imagem, faça o teste do build do React:
 
@@ -60,9 +63,15 @@ Iniciar Docker:
 
 docker run -p 80:80 react
 
+## Workers
 
-### Atualização rapida:
-git pull && dotnet publish -c Release -o ./out --runtime linux-x64 && docker build -t api . && docker run -p 443:443 api
+### createandedituser
+dentro da pasta:
+
+back-end\Workers\CreateAndEditUser
+
+git pull && dotnet publish -c Release -o ./out && docker build -t createandedituser . && docker run -it --rm createandedituser
+
 
 # DOCS
 Cliente
