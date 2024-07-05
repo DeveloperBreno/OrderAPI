@@ -60,6 +60,10 @@ Iniciar Docker:
 
 docker run -p 80:80 react
 
+
+### Atualização rapida:
+git pull && dotnet publish -c Release -o ./out --runtime linux-x64 && docker build -t api . && docker run -p 443:443 api
+
 # DOCS
 Cliente
 O cliente abre um link via WhatsApp da loja ou por alguma rede social, monta um carrinho de compras. Depois disso, pode fazer um cadastro caso não tenha ou pode fazer o login caso já tenha um cadastro.
