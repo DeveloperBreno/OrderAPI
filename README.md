@@ -1,9 +1,9 @@
 # Toda a documentação e domínio do negócio serão escritos aqui
 ## Couchbase
-docker run -d --name couchbase \
-  -p 8091-8094:8091-8094 \
-  -p 11210:11210 \
-  -e COUCHBASE_ADMINISTRATOR_PASSWORD=DcpmQP3pFjNFrRJFNDwTRNwdAIKlvlHMCNrsC67Ijzc \
+docker run -d --name couchbase &&
+  -p 8091-8094:8091-8094 &&
+  -p 11210:11210 &&
+  -e COUCHBASE_ADMINISTRATOR_PASSWORD=DcpmQP3pFjNFrRJFNDwTRNwdAIKlvlHMCNrsC67Ijzc &&
   couchbase
   
 Para logar em algum gerenciador de banco não relacional, recomendo usar o NoSQLBooster:
