@@ -12,9 +12,17 @@ using Dominio.Interfaces;
 using Insfraestrutura.Repositorio;
 using Aplicacao.Aplicacoes;
 using Microsoft.Extensions.Configuration;
-
+using Microsoft.AspNetCore.Identity;
 class Program
 {
+
+    private readonly UserManager<ApplicationUser> _userManager;
+
+    public Program(UserManager<ApplicationUser> userManager)
+    {
+        _userManager = userManager;
+    }
+
     static async Task Main(string[] args)
     {
         var host = CreateHostBuilder(args).Build();
@@ -22,10 +30,11 @@ class Program
         using (var serviceScope = host.Services.CreateScope())
         {
             var services = serviceScope.ServiceProvider;
-            var aplicacaoUsuario = services.GetRequiredService<IAplicacaoUsuario>();
-            var configuration = services.GetRequiredService<IConfiguration>();
+            var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
 
-            await StartConsumerAsync(aplicacaoUsuario, configuration);
+            var program = new Program(userManager);
+
+            await program.StartConsumerAsync(services.GetRequiredService<IConfiguration>());
         }
 
         Console.WriteLine("Pressione [enter] para sair.");
@@ -46,11 +55,14 @@ class Program
                 services.AddDbContext<Contexto>(options =>
                     options.UseNpgsql(connectionString));
 
-                services.AddScoped<IAplicacaoUsuario, AplicacaoUsuario>();
+                // Adiciona os serviços de Identity
+                services.AddIdentity<ApplicationUser, IdentityRole>()
+                    .AddEntityFrameworkStores<Contexto>()
+                    .AddDefaultTokenProviders();
                 services.AddScoped<IUsuario, RepositorioUsuario>();
             });
 
-    static async Task StartConsumerAsync(IAplicacaoUsuario aplicacaoUsuario, IConfiguration configuration)
+    public async Task StartConsumerAsync(IConfiguration configuration)
     {
         var rabbitMQConfig = configuration.GetSection("RabbitMQ").Get<RabbitMQConfig>();
 
@@ -85,8 +97,14 @@ class Program
             try
             {
                 var applicationUser = JsonConvert.DeserializeObject<ApplicationUser>(message);
-                await ProcessarItemAsync(applicationUser, aplicacaoUsuario);
+                // simula que o usuario fez a confirmação do codigo via e-mail, para produção devemos enviar o email de fato
+                applicationUser.EmailConfirmed = true;
+                var resultado = await _userManager.CreateAsync(applicationUser, applicationUser.PasswordHash);
 
+                if (resultado.Errors.Any())
+                {
+                    throw new Exception(resultado.Errors.ToString());
+                }
             }
             catch (Exception ex)
             {
@@ -106,9 +124,11 @@ class Program
         await Task.Delay(Timeout.Infinite); // Mantém o programa em execução para continuar consumindo mensagens
     }
 
-    static async Task ProcessarItemAsync(ApplicationUser applicationUser, IAplicacaoUsuario aplicacaoUsuario)
+    static async Task ProcessarItemAsync(ApplicationUser applicationUser, UserManager<ApplicationUser> userManager)
     {
-        await aplicacaoUsuario.AdicionarUsuario(applicationUser.Email, applicationUser.PasswordHash, applicationUser.DataDeNascimento, applicationUser.Celular, applicationUser.NormalizedUserName);
+
+
+        await Task.CompletedTask;
     }
 
     static void RepublisarMensagem(IModel channel, string queueName, string message)

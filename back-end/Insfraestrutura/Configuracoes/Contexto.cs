@@ -48,7 +48,7 @@ public class Contexto : IdentityDbContext<ApplicationUser>
 
     public string ObterStringConexao()
     {
-        return "Host=200.6.48.21;Port=5432;Database=MyDatabase;Username=postgres;Password=DcpmQP3pFjNFrRJFNDwTRNwdAIKlvlHMCNrsC67Ijzc";
+        return "Host=200.6.48.21;Port=5432;Database=MyDatabase;Username=postgres;Password=DcpmQP3pFjNFrRJFNDwTRNwdAIKlvlHMCNrsC67Ijzc;";
     }
 
 }

@@ -280,3 +280,7 @@
 /back-end/Workers/CreateAndEditUser/out
 /back-end/Workers/CreateAndEditUser/obj/Release/net8.0
 /back-end/Workers/CreateAndEditUser/bin/Release/net8.0/runtimes/win/lib/net8.0
+back-end/Aplicacao/obj/Debug/net8.0/Aplicacao.csproj.FileListAbsolute.txt
+back-end/Aplicacao/obj/Debug/net8.0/Aplicacao.csproj.FileListAbsolute.txt
+back-end/Insfraestrutura/obj/Debug/net8.0/Insfraestrutura.csproj.FileListAbsolute.txt
+back-end/Enditades/obj/Debug/net8.0/Entidades.csproj.FileListAbsolute.txt
