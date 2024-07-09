@@ -71,8 +71,7 @@ public class RepositorioUsuario : RepositorioGenerico<ApplicationUser>, IUsuario
     public async Task<string> RetornaIdUsuario(string email)
     {
         var user = await _context.ApplicationUser
-        .FromSqlInterpolated($"SELECT \"Id\" FROM \"ApplicationUser\" WHERE \"Email\" = {email}")
-        .FirstOrDefaultAsync();
+        .FirstOrDefaultAsync( o => o.Email == email);
 
         return user.Id;
     }

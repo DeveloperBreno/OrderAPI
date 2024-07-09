@@ -108,7 +108,7 @@ public class UsuarioController : ControllerBase
              .AddIssuer("Teste.Securiry.Bearer")
              .AddAudience("Teste.Securiry.Bearer")
              .AddClaim("idUsuario", idUsuario)
-             .AddExpiry(5)
+             .AddExpiry(172800000)
              .Builder();
 
             return Ok(token.value);
