@@ -44,7 +44,7 @@ public class UsuarioController : ControllerBase
     {
         var user = new ApplicationUser
         {
-            UserName = login.email,
+            UserName = login.userName,
             Email = login.email,
             Celular = login.celular,
             Tipo = TipoUsuario.Comum,
