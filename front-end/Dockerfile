@@ -3,7 +3,7 @@ FROM node:18 AS build
 
 WORKDIR /app
 
-# Copia o package.json e package-lock.json (ou yarn.lock)
+# Copia o package.json e package-lock.json
 COPY package*.json ./
 
 # Instala as dependências
@@ -16,7 +16,10 @@ COPY . .
 RUN npm run build
 
 # Etapa de Produção
-FROM nginx:alpine
+FROM nginx:1.27.0
+
+# Copia o arquivo de configuração personalizado para o diretório de configuração do Nginx
+COPY nginx.conf /etc/nginx/nginx.conf
 
 # Copia os arquivos construídos para o diretório do Nginx
 COPY --from=build /app/build /usr/share/nginx/html
