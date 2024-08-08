@@ -60,6 +60,10 @@ Iniciar Docker:
 
 docker run -p 80:80 react
 
+### Atualização rapida
+
+git reset --hard HEAD && git pull && docker build -t react . &&  docker run -p 80:80 react
+
 ## Workers
 
 ### createandedituser
