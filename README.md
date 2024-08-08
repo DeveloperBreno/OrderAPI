@@ -38,7 +38,7 @@ docker build -t api .
 
 Iniciar:
 
-docker run -p 443:443 api
+docker run -p 5000:5000 api
 
 Depois acesse: http://localhost:5000/swagger/index.html
 
