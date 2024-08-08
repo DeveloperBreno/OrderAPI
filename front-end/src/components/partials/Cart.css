@@ -1,0 +1,86 @@
+/* src/components/partials/Cart.css */
+.cart-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+.cart-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    max-height: 400px; /* Ajuste a altura conforme necessário */
+    overflow-y: auto;
+    background-color: white;
+    border-top: 1px solid #ddd;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    transform: translateY(100%);
+    z-index:1;
+}
+
+    .cart-container.open {
+        transform: translateY(0);
+    }
+
+.cart-header {
+    padding: 10px;
+    margin-top: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    .cart-header h2 {
+        margin: 0;
+    }
+
+.btn-close {
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+}
+
+.cart-content {
+    padding: 10px;
+}
+
+.cart-item-enter {
+    opacity: 0;
+    transform: scale(0.9);
+}
+
+.cart-item-enter-active {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 300ms, transform 300ms;
+}
+
+.cart-item-exit {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.cart-item-exit-active {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 300ms, transform 300ms;
+}
+
+/* src/components/partials/Cart.css */
+.btn-close {
+    background: none;
+    border: none;
+    color: #dc3545; /* Cor do botão de fechar */
+    cursor: pointer;
+}

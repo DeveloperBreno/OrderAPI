@@ -11,8 +11,11 @@ function App() {
   const [connection, setConnection] = useState(null);
   const [messages, setMessages] = useState([]);
   const [showMessage, setShowMessage] = useState(false);
-  const [messageText, setMessageText] = useState('');
-  const [pathParam, setPathParam] = useState('');
+    const [messageText, setMessageText] = useState('');
+
+    const [pathParam, setPathParam] = useState('');
+
+
   const [lojas] = useState([
     {
       id: 1,
@@ -74,14 +77,21 @@ function App() {
   const [cartItems, setCartItems] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
+    useEffect(() => {
+        
+    
+
     const serverUrl = 'http://localhost:5081'; // Substitua pelo endereço do seu servidor SignalR
 
     const newConnection = new signalR.HubConnectionBuilder()
       .withUrl(`${serverUrl}/chatHub`)
       .build();
 
-    setConnection(newConnection);
+        setConnection(newConnection);
+
+        let pp = window.location.href.split('/')[1] ?? '';
+        setPathParam(pp);
+
   }, []);
 
   useEffect(() => {
@@ -118,8 +128,8 @@ function App() {
 
   const onSelectLoja = (loja) => {
     if (loja.disponivelAgora) {
-      setPathParam(loja.url);
-      window.location.href = `/${loja.url}`;
+        setPathParam(loja.url);
+
     } else {
       notificar(`A loja ${loja.name} está indisponível no momento.`);
     }

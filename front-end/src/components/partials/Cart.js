@@ -1,71 +1,96 @@
-import React from 'react';
-import { Button } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Button, Card, Col, Row } from 'react-bootstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt, faCartShopping, faChevronUp, faChevronDown, faTimes } from '@fortawesome/free-solid-svg-icons';
 import ExibeValor from '../forms/ExibeValor';
+import './Cart.css'; // Importando o CSS para as transições
+
 const Cart = ({ cartItems, onRemoveFromCart }) => {
-  return (
-    <div className="container mt-3">
-      <h2><FontAwesomeIcon icon={faCartShopping} /> 
-      <span style={{ marginLeft: '0.5rem' }}> Carrinho </span> </h2>
+    const [isOpen, setIsOpen] = useState(false);
 
-      <FontAwesomeIcon icon="fa-solid fa-shop" />
-      {cartItems.length === 0 ? (
-        <p>Seu carrinho está vazio.</p>
-      ) : (
-        <>
-          <table className="table table-striped table-bordered table-hover">
-            <thead className="thead-dark">
-              <tr>
-                <th>Foto</th>
-                <th>Produto</th>
-                <th>Preço</th>
-                <th>Por apenas</th>
-                <th>Quantidade</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <TransitionGroup component={null}>
-                {cartItems.map((item) => (
-                  <CSSTransition key={item.id} timeout={300} classNames="cart-item">
-                    <tr>
-                      <td>
-                      <img src={item.image} className="card-img-top" alt={item.name} 
-                       style={{ width: '70px', height: '70px' }} />
-                      </td>
-                      <td>{item.name}</td>
-                      <td><ExibeValor preco={item.price} /></td>
-                      <td><ExibeValor preco={item.currentPrice} /></td>
-                      <td>{item.quantity}</td>
-                      <td>
-                        <Button
-                          className="btn"
-                          variant="light"
-                          onClick={() => onRemoveFromCart(item.id)}
-                        >
-                          <FontAwesomeIcon icon={faTrashAlt} size="1x" color="#df433b" />
+    const toggleCart = () => {
+        setIsOpen(!isOpen);
+    };
 
-                        </Button>
-                      </td>
-                    </tr>
-                  </CSSTransition>
-                ))}
-              </TransitionGroup>
-            </tbody>
-          </table>
+    const QuantidadeDeItensNoCarrinho = () => {
+        let total = 0;
+        for (var i = 0; i < cartItems.length; i++) {
+            let produto = cartItems[i];
+            total = total + produto.quantity;
+        }
 
-          <div>
+        return total; 
+    };
 
-          </div>
+    return (
+        <div>
+            {/* Botão fixo para abrir/fechar o carrinho */}
 
-        </>
 
-      )}
-    </div>
-  );
+            <div className="cart-toggle btn btn-primary" onClick={toggleCart}>
+                <FontAwesomeIcon icon={isOpen ? faChevronDown : faCartShopping} size="1x" />
+
+                {!isOpen && (
+                    <span className="badge text-bg-transparent">
+                        {QuantidadeDeItensNoCarrinho()}
+                    </span>
+                )}
+            </div>
+
+
+            <div className={`cart-container ${isOpen ? 'open' : ''}`}>
+                <div className="cart-header">
+                    <h2 className="text-primary">
+                        <FontAwesomeIcon icon={faCartShopping} /> 
+                        <span style={{ marginLeft: '5px' }}> Carrinho </span>
+                    </h2>
+                </div>
+                <div className="cart-content">
+                    {cartItems.length === 0 ? (
+                        <p>Seu carrinho está vazio.</p>
+                    ) : (
+                        <Row>
+                            <TransitionGroup>
+                                {cartItems.map((item) => (
+                                    <CSSTransition key={item.id} timeout={300} classNames="cart-item">
+                                        <Col xs={12} sm={6} md={4} lg={3} className="mb-3">
+                                            <Card>
+                                                <Card.Img
+                                                    variant="top"
+                                                    src={item.image}
+                                                    style={{ height: '100px', objectFit: 'cover' }}
+                                                />
+                                                <Card.Body>
+                                                    <Card.Title>{item.name}</Card.Title>
+                                                    <Card.Text>
+                                                        <strong>Preço:</strong> <ExibeValor preco={item.price} />
+                                                    </Card.Text>
+                                                    <Card.Text>
+                                                        <strong>Por apenas:</strong> <ExibeValor preco={item.currentPrice} />
+                                                    </Card.Text>
+                                                    <Card.Text>
+                                                        <strong>Quantidade:</strong> {item.quantity}
+                                                    </Card.Text>
+                                                    <Button
+                                                        className="btn"
+                                                        variant="light"
+                                                        onClick={() => onRemoveFromCart(item.id)}
+                                                    >
+                                                        <FontAwesomeIcon icon={faTrashAlt} size="1x" color="#df433b" />
+                                                    </Button>
+                                                </Card.Body>
+                                            </Card>
+                                        </Col>
+                                    </CSSTransition>
+                                ))}
+                            </TransitionGroup>
+                        </Row>
+                    )}
+                </div>
+            </div>
+        </div>
+    );
 };
 
 export default Cart;
