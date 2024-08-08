@@ -68,11 +68,12 @@ git reset --hard HEAD && git pull && docker build -t react . &&  docker run -p 8
 
 ### createandedituser
 dentro da pasta:
-
+(Local)
 back-end\Workers\CreateAndEditUser
+execute: dotnet publish -c Release -o ./out
 
-git reset --hard HEAD && git pull && dotnet publish -c Release -o ./out && docker build -t createandedituser . && docker run -it --rm createandedituser
-
+(vps)
+git reset --hard HEAD && git pull && docker build -t createandedituser . && docker run -it --rm createandedituser
 
 # DOCS
 Cliente
