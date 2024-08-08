@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Card, Col, Row } from 'react-bootstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashAlt, faCartShopping, faChevronUp, faChevronDown, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt, faCartShopping, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import ExibeValor from '../forms/ExibeValor';
 import './Cart.css'; // Importando o CSS para as transições
 
