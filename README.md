@@ -9,6 +9,8 @@ mongodb://admin:sua_senha_segura@localhost:27017
 ### 1. Pull e Run do contêiner do PostgreSQL
 docker run -e "POSTGRES_DB=MyDatabase" -e "POSTGRES_PASSWORD=DcpmQP3pFjNFrRJFNDwTRNwdAIKlvlHMCNrsC67Ijzc" -p 5432:5432 --name postgres -d postgres:latest
 
+### Agora, execute a migração seguindo as instruções no README localizado na pasta de Infraestrutura da solução.
+
 ### baixe o pg admin para gerenciar o banco de dados postgres sql
 ![image](https://github.com/user-attachments/assets/d609f8c4-1878-41b4-8832-fc0c59a41e5d)
 
