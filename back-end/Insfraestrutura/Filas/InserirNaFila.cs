@@ -16,7 +16,7 @@ public class InserirNaFila : IInsereNaFila
         _channel = _connection.CreateModel();
     }
 
-    public void Inserir(object obj, string nomeDaFila)
+    private void CriarNaFila(object obj, string nomeDaFila)
     {
         var messageBody = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(obj));
 
@@ -28,5 +28,17 @@ public class InserirNaFila : IInsereNaFila
                 arguments: null);
 
         _channel.BasicPublish(exchange: "", routingKey: nomeDaFila, basicProperties: null, body: messageBody);
+    }
+
+
+    public void Inserir(object obj, string nomeDaFila)
+    {
+        CriarNaFila(obj, nomeDaFila);
+    }
+
+    public void InserirNaFilaDeErro(object obj, string nomeDaFilaDeErro, Exception e)
+    {
+        var newObj = new { error = e, message = obj };
+        CriarNaFila(newObj, nomeDaFilaDeErro);
     }
 }

@@ -68,11 +68,9 @@ public class RepositorioUsuario : RepositorioGenerico<ApplicationUser>, IUsuario
 
     }
 
-    public async Task<string> RetornaIdUsuario(string email)
+    public async Task<string> RetornaIdUsuario(string userName)
     {
-        var user = await _context.ApplicationUser
-        .FirstOrDefaultAsync( o => o.Email == email);
-
+        var user = await _context.ApplicationUser.FirstOrDefaultAsync(o => o.UserName == userName || o.Email == userName);
         return user.Id;
     }
 

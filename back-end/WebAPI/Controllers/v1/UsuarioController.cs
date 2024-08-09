@@ -92,8 +92,10 @@ public class UsuarioController : ControllerBase
         if (string.IsNullOrWhiteSpace(login.email) || string.IsNullOrWhiteSpace(login.senha))
             return Unauthorized();
 
+        var emailOuUserName = string.IsNullOrWhiteSpace(login.email) ? login.userName : login.email;
+
         var resultado = await
-            _signInManager.PasswordSignInAsync(login.email, login.senha, false, lockoutOnFailure: false);
+            _signInManager.PasswordSignInAsync(emailOuUserName, login.senha, false, lockoutOnFailure: false);
 
         if (resultado.Succeeded)
         {

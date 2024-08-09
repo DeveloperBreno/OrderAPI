@@ -84,7 +84,11 @@ builder.Services.AddScoped<IInsereNaFila, InserirNaFila>();
 // JWT
 // muda no usuarioController tambem
 var key = "Secret_Key-12345678_Secret_Key-12345678";
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
     .AddJwtBearer(option =>
     {
         option.TokenValidationParameters = new TokenValidationParameters
@@ -113,6 +117,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+builder.Services.AddAuthorization();
+
 builder.Services.AddControllers();
 builder.Services.AddLogging();
 
@@ -132,7 +138,7 @@ app.UseSwaggerUI();
 //}
 
 //app.UseHttpsRedirection();
-app.MapHub<ChatHub>("/chathub"); 
+app.MapHub<ChatHub>("/chathub");
 
 app.UseCors("AllowAll");
 
