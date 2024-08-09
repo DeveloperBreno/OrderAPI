@@ -47,7 +47,7 @@ docker run -p 5000:5000 api
 Depois acesse: http://localhost:5000/swagger/index.html
 
 ### Atualização rapida:
-git reset --hard HEAD && git pull && dotnet publish -c Release -o ./out --runtime linux-x64 && docker build -t api . && docker run -p 443:443 api
+git reset --hard HEAD && git pull && docker build -t api . && docker run -p 5000:5000 api
 
 ## Front-end
 Antes de buildar a imagem, faça o teste do build do React:
