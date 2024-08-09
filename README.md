@@ -77,7 +77,7 @@ back-end\Workers\CreateAndEditUser
 execute: dotnet publish -c Release -o ./out
 
 # Adicione a pasta ./out ao repositório
-git add ./out
+git add ./out -f
 
 # Faça um commit com uma mensagem descritiva
 git commit -m "Adiciona pasta de saída de build ao repositório"
