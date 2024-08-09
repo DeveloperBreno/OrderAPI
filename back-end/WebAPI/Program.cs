@@ -135,6 +135,11 @@ app.UseSwagger();
 app.UseSwaggerUI();
 //}
 
+if (app.Environment.IsProduction())
+{
+    app.UseHttpsRedirection();
+}
+
 //app.UseHttpsRedirection();
 app.MapHub<ChatHub>("/chathub");
 
