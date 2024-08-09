@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\dev\\OrderApi\\OrderAPI\\front-end\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\dev\\OrderApi\\OrderAPI\\front-end\\src\\components\\partials\\Cart.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\components\\partials\\Cart.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\dev\\OrderApi\\OrderAPI\\front-end\\nginx.conf||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:nginx.conf||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\dev\\OrderApi\\OrderAPI\\front-end\\src\\components\\partials\\Cart.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\components\\partials\\Cart.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\dev\\OrderApi\\OrderAPI\\front-end\\src\\components\\partials\\Cart.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\components\\partials\\Cart.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\dev\\OrderApi\\OrderAPI\\front-end\\src\\App.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
@@ -27,15 +31,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "nginx.conf",
+              "DocumentMoniker": "C:\\dev\\OrderApi\\OrderAPI\\front-end\\nginx.conf",
+              "RelativeDocumentMoniker": "nginx.conf",
+              "ToolTip": "C:\\dev\\OrderApi\\OrderAPI\\front-end\\nginx.conf",
+              "RelativeToolTip": "nginx.conf",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-08-08T03:02:23.511Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Cart.css",
               "DocumentMoniker": "C:\\dev\\OrderApi\\OrderAPI\\front-end\\src\\components\\partials\\Cart.css",
               "RelativeDocumentMoniker": "src\\components\\partials\\Cart.css",
               "ToolTip": "C:\\dev\\OrderApi\\OrderAPI\\front-end\\src\\components\\partials\\Cart.css",
               "RelativeToolTip": "src\\components\\partials\\Cart.css",
-              "ViewState": "AQIAACEAAAAAAAAAAAAIwE0AAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2024-08-08T00:23:26.196Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-08T00:23:26.196Z"
             },
             {
               "$type": "Document",
@@ -45,14 +61,13 @@
               "RelativeDocumentMoniker": "src\\components\\partials\\Cart.js",
               "ToolTip": "C:\\dev\\OrderApi\\OrderAPI\\front-end\\src\\components\\partials\\Cart.js",
               "RelativeToolTip": "src\\components\\partials\\Cart.js",
-              "ViewState": "AQIAACUAAAAAAAAAAAAqwFAAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAtAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-08-08T00:20:34.108Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-08T00:20:34.108Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "App.js",
               "DocumentMoniker": "C:\\dev\\OrderApi\\OrderAPI\\front-end\\src\\App.js",
               "RelativeDocumentMoniker": "src\\App.js",
@@ -60,8 +75,7 @@
               "RelativeToolTip": "src\\App.js",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-08-08T00:01:20.93Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-08T00:01:20.93Z"
             }
           ]
         }
