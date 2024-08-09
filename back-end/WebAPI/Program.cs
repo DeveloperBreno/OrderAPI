@@ -140,7 +140,7 @@ app.MapHub<ChatHub>("/chathub");
 
 app.UseCors("AllowAll");
 
-//app.UseRequestTimeout(TimeSpan.FromSeconds(30));
+app.UseRequestTimeout(TimeSpan.FromSeconds(30));
 
 app.UseAuthentication();
 app.UseAuthorization();
