@@ -32,6 +32,11 @@ public class AplicacaoUsuario : IAplicacaoUsuario
         return await _IUsuario.RetornaIdUsuario(email);
     }
 
+    public async Task<string> RetornaUserName(string email)
+    {
+        return await _IUsuario.RetornaUserName(email);
+    }
+
     public async Task<string> RetornaONomeDoUsuarioPorId(string idUsuario)
     {
         return await _IUsuario.RetornaONomeDoUsuarioPorId(idUsuario);

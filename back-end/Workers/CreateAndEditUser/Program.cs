@@ -134,10 +134,20 @@ class Program
             }
             catch (Exception ex)
             {
-                var obj = JsonConvert.DeserializeObject<object>(message);
 
-                // Republica a mensagem em caso de falha
-                _IInsereNaFila.InserirNaFilaDeErro(obj, queueName, ex);
+                try
+                {
+                    var obj = JsonConvert.DeserializeObject(message);
+
+
+                    // Republica a mensagem em caso de falha
+                    _IInsereNaFila.InserirNaFilaDeErro(obj, $"FilaDeErro{queueName}", ex);
+                }
+                catch (Exception)
+                {
+
+                }
+                
             }
 
             // Confirma que a mensagem foi processada

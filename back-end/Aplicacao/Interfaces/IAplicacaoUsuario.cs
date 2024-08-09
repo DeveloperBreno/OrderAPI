@@ -7,5 +7,6 @@ public interface IAplicacaoUsuario
     Task<bool> ExisteUsuario(string email, string senha);
     Task<bool> RemoverUsuarioPorId(string id);
     Task<string> RetornaIdUsuario(string email);
+    Task<string> RetornaUserName(string email);
     Task<string> RetornaONomeDoUsuarioPorId(string idUsuario);
 }

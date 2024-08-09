@@ -42,6 +42,43 @@ public class UsuarioController : ControllerBase
     [HttpPost("/v1/User/Create")]
     public async Task<IActionResult> AdicionaUsuarioIdentity([FromBody] Login login)
     {
+
+        var errorMessage = "";
+             // Verifica se a senha é nula ou vazia
+        if (string.IsNullOrWhiteSpace(login.senha))
+        {
+            errorMessage = "A senha não pode ser nula ou vazia.";
+        }
+
+        // Verifica o comprimento mínimo da senha
+        if (login.senha.Length < 6)
+        {
+            errorMessage = "A senha deve ter pelo menos 6 caracteres.";
+        }
+
+        // Verifica se a senha contém pelo menos uma letra maiúscula
+        if (!login.senha.Any(char.IsUpper))
+        {
+            errorMessage = "A senha deve conter pelo menos uma letra maiúscula.";
+        }
+
+        // Verifica se a senha contém pelo menos uma letra minúscula
+        if (!login.senha.Any(char.IsLower))
+        {
+            errorMessage = "A senha deve conter pelo menos uma letra minúscula.";
+        }
+
+        // Verifica se a senha contém pelo menos um caractere especial
+        if (!login.senha.Any(ch => !char.IsLetterOrDigit(ch)))
+        {
+            errorMessage = "A senha deve conter pelo menos um caractere especial.";
+        }
+
+        if (errorMessage.Length > 0)
+        {
+            return BadRequest(errorMessage);
+        }
+
         var user = new ApplicationUser
         {
             UserName = login.userName,
@@ -57,30 +94,6 @@ public class UsuarioController : ControllerBase
 
         return Ok("Usuário será inserido em breve");
 
-        //if (string.IsNullOrWhiteSpace(login.email) || string.IsNullOrWhiteSpace(login.senha))
-        //    return Ok("Falta alguns dados");
-
-
-        //var resultado = await _userManager.CreateAsync(user, login.senha);
-
-        //if (resultado.Errors.Any())
-        //{
-        //    return BadRequest(resultado.Errors);
-        //}
-
-        //// Geração de Confirmação caso precise
-        //var userId = await _userManager.GetUserIdAsync(user);
-        //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-        //code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-
-        //// retorno email 
-        //code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
-        //var resultado2 = await _userManager.ConfirmEmailAsync(user, code);
-
-        //if (resultado2.Succeeded)
-        //    return Ok("Usuário Adicionado com Sucesso");
-        //else
-        //    return Ok("Erro ao confirmar usuários");
     }
 
 
@@ -92,10 +105,10 @@ public class UsuarioController : ControllerBase
         if (string.IsNullOrWhiteSpace(login.email) || string.IsNullOrWhiteSpace(login.senha))
             return Unauthorized();
 
-        var emailOuUserName = string.IsNullOrWhiteSpace(login.email) ? login.userName : login.email;
+        string userName = _IAplicacaoUsuario.RetornaUserName(login.email).Result;
 
         var resultado = await
-            _signInManager.PasswordSignInAsync(emailOuUserName, login.senha, false, lockoutOnFailure: false);
+            _signInManager.PasswordSignInAsync(userName, login.senha, false, lockoutOnFailure: false);
 
         if (resultado.Succeeded)
         {
