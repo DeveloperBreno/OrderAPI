@@ -142,8 +142,13 @@ app.UseCors("AllowAll");
 
 app.UseRequestTimeout(TimeSpan.FromSeconds(30));
 
+app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
 
 app.MapControllers();
 
