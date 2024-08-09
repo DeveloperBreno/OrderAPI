@@ -6,21 +6,23 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Entidades.Entidades;
-using Aplicacao.Interfaces;
 using Insfraestrutura.Configuracoes;
 using Dominio.Interfaces;
 using Insfraestrutura.Repositorio;
-using Aplicacao.Aplicacoes;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Identity;
+using Dominio.Interfaces.Filas;
+using Insfraestrutura.Filas;
 class Program
 {
 
     private readonly UserManager<ApplicationUser> _userManager;
+    private readonly IInsereNaFila _IInsereNaFila;
 
-    public Program(UserManager<ApplicationUser> userManager)
+    public Program(UserManager<ApplicationUser> userManager, IInsereNaFila insereNaFila)
     {
         _userManager = userManager;
+        _IInsereNaFila = insereNaFila;
     }
 
     static async Task Main(string[] args)
@@ -32,7 +34,11 @@ class Program
             var services = serviceScope.ServiceProvider;
             var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
 
-            var program = new Program(userManager);
+            // Obtenha a instância de IInsereNaFila do container DI
+            var insereNaFila = services.GetRequiredService<IInsereNaFila>();
+
+            // Instancie Program com dependências resolvidas do container DI
+            var program = new Program(userManager, insereNaFila);
 
             await program.StartConsumerAsync(services.GetRequiredService<IConfiguration>());
         }
@@ -40,6 +46,7 @@ class Program
         Console.WriteLine("Pressione [enter] para sair.");
         Console.ReadLine();
     }
+
 
     static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder(args)
@@ -60,6 +67,8 @@ class Program
                     .AddEntityFrameworkStores<Contexto>()
                     .AddDefaultTokenProviders();
                 services.AddScoped<IUsuario, RepositorioUsuario>();
+
+                services.AddScoped<IInsereNaFila, InserirNaFila>();
             });
 
     public async Task StartConsumerAsync(IConfiguration configuration)
@@ -108,8 +117,10 @@ class Program
             }
             catch (Exception ex)
             {
+                var obj = JsonConvert.DeserializeObject<object>(message);
+
                 // Republica a mensagem em caso de falha
-                RepublisarMensagem(channel, queueName, message);
+                _IInsereNaFila.InserirNaFilaDeErro(obj, queueName, ex);
             }
 
             // Confirma que a mensagem foi processada
@@ -131,24 +142,6 @@ class Program
         await Task.CompletedTask;
     }
 
-    static void RepublisarMensagem(IModel channel, string queueName, string message)
-    {
-        queueName = $"FilaDeErro{queueName}";
-        var body = Encoding.UTF8.GetBytes(message);
-
-        channel.QueueDeclare(queue: queueName,
-                     durable: true,
-                     exclusive: false,
-                     autoDelete: false,
-                     arguments: null);
-
-        channel.BasicPublish(exchange: "",
-                             routingKey: queueName,
-                             basicProperties: null,
-                             body: body);
-
-        Console.WriteLine(" [x] Mensagem republicada: {0}", message);
-    }
 }
 
 public class RabbitMQConfig
