@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Identity;
 using Dominio.Interfaces.Filas;
 using Insfraestrutura.Filas;
+using Microsoft.Extensions.Options;
 class Program
 {
 
@@ -33,11 +34,8 @@ class Program
         {
             var services = serviceScope.ServiceProvider;
             var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
-
-            // Obtenha a instância de IInsereNaFila do container DI
             var insereNaFila = services.GetRequiredService<IInsereNaFila>();
 
-            // Instancie Program com dependências resolvidas do container DI
             var program = new Program(userManager, insereNaFila);
 
             await program.StartConsumerAsync(services.GetRequiredService<IConfiguration>());
@@ -47,29 +45,48 @@ class Program
         Console.ReadLine();
     }
 
-
     static IHostBuilder CreateHostBuilder(string[] args) =>
-        Host.CreateDefaultBuilder(args)
-            .ConfigureAppConfiguration((context, builder) =>
+    Host.CreateDefaultBuilder(args)
+        .ConfigureAppConfiguration((context, builder) =>
+        {
+            builder.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+        })
+        .ConfigureServices((hostContext, services) =>
+        {
+            var configuration = hostContext.Configuration;
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
+
+            services.AddDbContext<Contexto>(options =>
+                options.UseNpgsql(connectionString));
+
+            // Adiciona os serviços de Identity
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<Contexto>()
+                .AddDefaultTokenProviders();
+            services.AddScoped<IUsuario, RepositorioUsuario>();
+
+            // Configura RabbitMQ
+            services.Configure<RabbitMQConfig>(configuration.GetSection("RabbitMQ"));
+            services.AddSingleton(sp =>
             {
-                builder.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
-            })
-            .ConfigureServices((hostContext, services) =>
-            {
-                var configuration = hostContext.Configuration;
-                var connectionString = configuration.GetConnectionString("DefaultConnection");
-
-                services.AddDbContext<Contexto>(options =>
-                    options.UseNpgsql(connectionString));
-
-                // Adiciona os serviços de Identity
-                services.AddIdentity<ApplicationUser, IdentityRole>()
-                    .AddEntityFrameworkStores<Contexto>()
-                    .AddDefaultTokenProviders();
-                services.AddScoped<IUsuario, RepositorioUsuario>();
-
-                services.AddScoped<IInsereNaFila, InserirNaFila>();
+                var rabbitMQConfig = sp.GetRequiredService<IOptions<RabbitMQConfig>>().Value;
+                var factory = new ConnectionFactory()
+                {
+                    HostName = rabbitMQConfig.HostName,
+                    Port = rabbitMQConfig.Port,
+                    UserName = rabbitMQConfig.UserName,
+                    Password = rabbitMQConfig.Password
+                };
+                return factory.CreateConnection();
             });
+            services.AddSingleton(sp =>
+            {
+                var connection = sp.GetRequiredService<IConnection>();
+                return connection.CreateModel();
+            });
+
+            services.AddScoped<IInsereNaFila, InserirNaFila>();
+        });
 
     public async Task StartConsumerAsync(IConfiguration configuration)
     {
