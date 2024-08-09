@@ -76,6 +76,16 @@ dentro da pasta:
 back-end\Workers\CreateAndEditUser
 execute: dotnet publish -c Release -o ./out
 
+# Adicione a pasta ./out ao repositório
+git add ./out
+
+# Faça um commit com uma mensagem descritiva
+git commit -m "Adiciona pasta de saída de build ao repositório"
+
+# Envie as alterações para o repositório remoto
+git push
+
+
 (vps)
 git reset --hard HEAD && git pull && docker build -t createandedituser . && docker run -it --rm createandedituser
 
