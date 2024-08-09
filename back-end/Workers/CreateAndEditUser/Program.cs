@@ -164,8 +164,6 @@ class Program
 
     static async Task ProcessarItemAsync(ApplicationUser applicationUser, UserManager<ApplicationUser> userManager)
     {
-
-
         await Task.CompletedTask;
     }
 
